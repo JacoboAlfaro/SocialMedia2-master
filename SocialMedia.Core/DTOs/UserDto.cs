@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SocialMedia.Core.Entities;
+using System;
+using System.Collections.Generic;
 
 namespace SocialMedia.Core.DTOs
 {
@@ -11,5 +13,8 @@ namespace SocialMedia.Core.DTOs
         public DateTime? DateOfBirth { get; set; }
         public string Telephone { get; set; }
         public bool? IsActive { get; set; }
+
+        public ICollection<Comment> Comments { get; set; }
+        public ICollection<Post> Posts { get; set; }
     }
 }

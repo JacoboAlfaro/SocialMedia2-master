@@ -5,8 +5,8 @@ namespace SocialMedia.Infrastructure.Interfaces
 {
     public interface IUriService
     {
-        Uri GetPostPaginationUri(PostQueryFilter filter, string actionUrl);
-        Uri GetUserPaginationUri(UserQueryFilter filter, string actionUrl);
+        Uri GetPostPaginationUri(PostQueryFilter filter, string actionUrl, int currentPage);
+        Uri GetUserPaginationUri(UserQueryFilter filter, string actionUrl, int currentPage);
 
     }
 }

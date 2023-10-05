@@ -24,6 +24,8 @@ namespace SocialMedia.Core.Services
         public async Task<User> GetUser(int id)
         {
             var user = await _unitOfWork.UserRepository.GetById(id);
+            var posts = await _unitOfWork.PostRepository.GetPostsByUser(id);
+            user.Posts = posts.ToList();
             if (user == null)
             {
                 throw new BusinessExceptions("User doesn't exist");
@@ -37,6 +39,12 @@ namespace SocialMedia.Core.Services
             filters.PageSize = filters.PageSize == 0 ? _paginationOptions.DefaultPageSize : filters.PageSize;
 
             var users = _unitOfWork.UserRepository.GetAll();
+
+            //foreach (var user in users){
+            //    var posts =  _unitOfWork.PostRepository.GetPostsByUser(user.Id);
+            //    user.Posts = posts.ToList();
+            //}
+
 
             if (filters.FirstName != null)
             {
@@ -54,10 +62,10 @@ namespace SocialMedia.Core.Services
             {
                 users = users.Where(x => x.DateOfBirth.ToShortDateString() == filters.DateOfBirth?.ToShortDateString());
             }
-            if (filters.IsActive.ToString() != null)
-            {
-                users = users.Where(x => x.IsActive.ToString().ToLower() == filters.IsActive.ToString().ToLower());
-            }
+            //if (filters.IsActive.ToString() != null)
+            //{
+            //    users = users.Where(x => x.IsActive.ToString().ToLower() == filters.IsActive.ToString().ToLower());
+            //}
 
             var pagedUser = PagedList<User>.Create(users, filters.PageNumber, filters.PageSize);
             return pagedUser;

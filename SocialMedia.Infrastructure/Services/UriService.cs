@@ -14,14 +14,14 @@ namespace SocialMedia.Infrastructure.Services
             _baseUri = baseUri;
         }
 
-        public Uri GetPostPaginationUri(PostQueryFilter filter, string actionUrl)
+        public Uri GetPostPaginationUri(PostQueryFilter filter, string actionUrl, int currentPage)
         {
-            string baseUrl = $"{_baseUri}{actionUrl}";
+            string baseUrl = $"{_baseUri}{actionUrl}?pageNumber={currentPage}";
             return new Uri(baseUrl);
         }
-        public Uri GetUserPaginationUri(UserQueryFilter filter, string actionUrl)
+        public Uri GetUserPaginationUri(UserQueryFilter filter, string actionUrl, int currentPage)
         {
-            string baseUrl = $"{_baseUri}{actionUrl}";
+            string baseUrl = $"{_baseUri}{actionUrl}?pageNumber={currentPage}";
             return new Uri(baseUrl);
         }
     }
