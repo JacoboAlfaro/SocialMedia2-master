@@ -9,6 +9,7 @@ namespace SocialMedia.Core.Interfaces
     public interface IPostRepository : IRepository<Post>
     {
         Task<IEnumerable<Post>> GetPostsByUser(int UserId);
+        Task<IEnumerable<Post>> GetSummaryPostsByUserId(int userId);
 
     }
 }

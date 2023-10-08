@@ -10,7 +10,7 @@ namespace SocialMedia.Core.QueryFilters
         public string LastName { get; set; }
         public string Email { get; set; }
         public DateTime? DateOfBirth { get; set; }
-        public bool IsActive { get; set; }
+        public bool? IsActive { get; set; }
 
         public int PageSize { get; set; }
         public int PageNumber { get; set; }

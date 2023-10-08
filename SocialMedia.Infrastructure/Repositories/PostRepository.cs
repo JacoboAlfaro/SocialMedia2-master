@@ -16,5 +16,16 @@ namespace SocialMedia.Infrastructure.Repositories
         {
             return await _entities.Where(x => x.UserId == userId).ToListAsync();
         }
+
+        public async Task<IEnumerable<Post>> GetSummaryPostsByUserId(int userId)
+        {
+            return await _entities.Where(x => x.UserId == userId).Select(p => new Post
+            {
+                UserId = p.UserId,
+                Date = p.Date,
+                Description = p.Description,
+                Image = p.Image
+            }).ToListAsync();
+        }
     }
 }

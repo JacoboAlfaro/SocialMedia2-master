@@ -71,6 +71,15 @@ namespace SoialMedia.Api
             {
                 options.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
             });
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowLocalhost", builder =>
+                {
+                    builder.WithOrigins("http://localhost:4200")  // Reemplaza con tu origen Angular
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -80,7 +89,7 @@ namespace SoialMedia.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseCors("AllowLocalhost");
             app.UseHttpsRedirection();
 
             app.UseSwagger();
@@ -103,6 +112,7 @@ namespace SoialMedia.Api
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }

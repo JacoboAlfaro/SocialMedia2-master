@@ -24,12 +24,15 @@ namespace SocialMedia.Core.Services
         public async Task<User> GetUser(int id)
         {
             var user = await _unitOfWork.UserRepository.GetById(id);
-            var posts = await _unitOfWork.PostRepository.GetPostsByUser(id);
-            user.Posts = posts.ToList();
+            
             if (user == null)
             {
                 throw new BusinessExceptions("User doesn't exist");
             }
+
+            var posts = await _unitOfWork.PostRepository.GetSummaryPostsByUserId(id);
+            user.Posts = posts.ToList();
+
             return user;
 
         }
@@ -62,10 +65,10 @@ namespace SocialMedia.Core.Services
             {
                 users = users.Where(x => x.DateOfBirth.ToShortDateString() == filters.DateOfBirth?.ToShortDateString());
             }
-            //if (filters.IsActive.ToString() != null)
-            //{
-            //    users = users.Where(x => x.IsActive.ToString().ToLower() == filters.IsActive.ToString().ToLower());
-            //}
+            if (filters.IsActive.HasValue)
+            {
+                users = users.Where(x => x.IsActive == filters.IsActive.Value);
+            }
 
             var pagedUser = PagedList<User>.Create(users, filters.PageNumber, filters.PageSize);
             return pagedUser;
@@ -73,6 +76,7 @@ namespace SocialMedia.Core.Services
 
         public async Task InsertUser(User user)
         {
+            user.IsActive = true;
             if ((DateTime.Now - user.DateOfBirth).TotalDays <= 0)
             {
                 throw new BusinessExceptions("The date of birth can not pass the actual date");
@@ -90,6 +94,7 @@ namespace SocialMedia.Core.Services
             {
                 throw new BusinessExceptions("Number must have exactly 10 numbers");
             }
+            
             await _unitOfWork.UserRepository.Add(user);
             await _unitOfWork.SaveChangesAsync();
         }

@@ -6,6 +6,7 @@ using SocialMedia.Core.Interfaces;
 using SocialMedia.Core.QueryFilters;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -60,6 +61,12 @@ namespace SocialMedia.Core.Services
             {
                 throw new BusinessExceptions("User doesn't exist");
             }
+            //if(post.Date == null)
+            //{
+            //    string nuevoFormato = post.Date.ToString("yyyy-MM-ddTHH:mm:ss.ff");
+            //    post.Date = DateTime.ParseExact(nuevoFormato, "yyyy-MM-ddTHH:mm:ss.ff", CultureInfo.InvariantCulture);
+            //}
+
             var userPost = await _unitOfWork.PostRepository.GetPostsByUser(post.UserId);
             if (userPost.Count() < 10)
             {
@@ -70,6 +77,7 @@ namespace SocialMedia.Core.Services
                 }
 
             }
+
             if (post.Description.ToLower().Contains("sexo"))
             {
                 throw new BusinessExceptions("Content not allowed");

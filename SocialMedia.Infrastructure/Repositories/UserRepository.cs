@@ -12,10 +12,5 @@ namespace SocialMedia.Infrastructure.Repositories
     {
         public UserRepository(SocialMediaContext context) : base(context) { }
 
-        //public async Task<IEnumerable<Post>> GetPostsByUser(int userId)
-        //{
-        //    return await _entities.Where(x => x.Id == userId).ToListAsync();
-        //}
-
     }
 }
