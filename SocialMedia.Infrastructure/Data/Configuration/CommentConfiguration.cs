@@ -8,13 +8,12 @@ namespace SocialMedia.Infrastructure.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<Comment> builder)
         {
-            builder.ToTable("Comentario");
-
             builder.HasKey(e => e.Id);
 
+            builder.ToTable("Comentario");
+
             builder.Property(e => e.Id)
-                .HasColumnName("IdComentario")
-                .ValueGeneratedNever();
+                .HasColumnName("IdComentario");
 
             builder.Property(e => e.PostId)
                 .HasColumnName("IdPublicacion");

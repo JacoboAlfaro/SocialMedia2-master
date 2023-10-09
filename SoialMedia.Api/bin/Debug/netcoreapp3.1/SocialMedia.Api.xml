@@ -4,6 +4,13 @@
         <name>SocialMedia.Api</name>
     </assembly>
     <members>
+        <member name="M:SocialMedia.Api.Controllers.CommentController.GetCommentsAsync(SocialMedia.Core.QueryFilters.CommentQueryFilter)">
+            <summary>
+            Retrieve all comments
+            </summary>
+            <param name="filters">Filters to apply</param>
+            <returns></returns>
+        </member>
         <member name="M:SocialMedia.Api.Controllers.PostController.GetPosts(SocialMedia.Core.QueryFilters.PostQueryFilter)">
             <summary>
             Retrieve all posts

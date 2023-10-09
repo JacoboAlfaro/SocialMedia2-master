@@ -43,9 +43,9 @@ namespace SocialMedia.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK,Type = typeof(ApiResponse<IEnumerable<PostDto>>))]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
 
-        public IActionResult GetPosts([FromQuery]PostQueryFilter filters)
+        public async Task<IActionResult> GetPosts([FromQuery]PostQueryFilter filters)
         {
-            var posts = _postService.GetPosts(filters);
+            var posts = await _postService.GetPosts(filters);
             var postsDtos = _mapper.Map<IEnumerable<PostDto>>(posts);
 
             var metadata = new MetaData

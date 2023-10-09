@@ -1,13 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "pb+yZm4HijJ69iDLMrdE51DF2jyJAIqKtrftV+ruZvLs+RMjKfZLr614Z1VMxyB3gFoM7eGgPbS0cviVlkQcAw==",
+  "dgSpecHash": "jn9suIrRVsKD2/UI1BIe0q21SVW0c/IPTLNO1C4WkfOKT177I7J5LGtF6qeSyp8A52riscK4jIAzFDXiiD5B5w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\jacob\\OneDrive\\Documentos\\GitHub\\SocialMedia2-master\\SocialMedia.Core\\SocialMedia.Core.csproj",
+  "projectFilePath": "C:\\Users\\jalfaroh\\Documents\\Jacobo\\NET\\SocialMedia2-master\\SocialMedia.Core\\SocialMedia.Core.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\jacob\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\3.1.3\\microsoft.extensions.dependencyinjection.abstractions.3.1.3.nupkg.sha512",
-    "C:\\Users\\jacob\\.nuget\\packages\\microsoft.extensions.options\\3.1.3\\microsoft.extensions.options.3.1.3.nupkg.sha512",
-    "C:\\Users\\jacob\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.3\\microsoft.extensions.primitives.3.1.3.nupkg.sha512",
-    "C:\\Users\\jacob\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512"
+    "C:\\Users\\jalfaroh\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\3.1.3\\microsoft.extensions.dependencyinjection.abstractions.3.1.3.nupkg.sha512",
+    "C:\\Users\\jalfaroh\\.nuget\\packages\\microsoft.extensions.options\\3.1.3\\microsoft.extensions.options.3.1.3.nupkg.sha512",
+    "C:\\Users\\jalfaroh\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.3\\microsoft.extensions.primitives.3.1.3.nupkg.sha512"
   ],
   "logs": []
 }

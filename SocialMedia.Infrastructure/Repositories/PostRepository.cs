@@ -21,6 +21,7 @@ namespace SocialMedia.Infrastructure.Repositories
         {
             return await _entities.Where(x => x.UserId == userId).Select(p => new Post
             {
+                Id = p.Id,
                 UserId = p.UserId,
                 Date = p.Date,
                 Description = p.Description,

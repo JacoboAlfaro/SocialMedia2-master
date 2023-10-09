@@ -14,7 +14,7 @@ namespace SocialMedia.Core.DTOs
         public string Telephone { get; set; }
         public bool? IsActive { get; set; }
 
-        public ICollection<Comment> Comments { get; set; }
-        public ICollection<Post> Posts { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<PostDto> Posts { get; set; }
     }
 }

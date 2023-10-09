@@ -24,5 +24,10 @@ namespace SocialMedia.Infrastructure.Services
             string baseUrl = $"{_baseUri}{actionUrl}?pageNumber={currentPage}";
             return new Uri(baseUrl);
         }
+        public Uri GetCommentPaginationUri(CommentQueryFilter filter, string actionUrl, int currentPage)
+        {
+            string baseUrl = $"{_baseUri}{actionUrl}?pageNumber={currentPage}";
+            return new Uri(baseUrl);
+        }
     }
 }

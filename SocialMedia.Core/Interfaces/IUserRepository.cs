@@ -9,7 +9,7 @@ namespace SocialMedia.Core.Interfaces
 {
     public interface IUserRepository : IRepository<User>
     {
-        //public async Task<IEnumerable<Post>> GetUserPosts(int userId);
+        Task<User> GetSummaryUserByUserId(int userId);
     }
 }
 

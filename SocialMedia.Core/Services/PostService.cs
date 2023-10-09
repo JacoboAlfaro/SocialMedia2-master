@@ -27,17 +27,24 @@ namespace SocialMedia.Core.Services
 
         public async Task<Post> GetPost(int id)
         {
-            return await _unitOfWork.PostRepository.GetById(id);
+            Post post = await _unitOfWork.PostRepository.GetById(id);
+            post.User = await _unitOfWork.UserRepository.GetSummaryUserByUserId(post.UserId);
+            return post;
         }
 
-        public PagedList<Post> GetPosts(PostQueryFilter filters)
+        public async Task<PagedList<Post>> GetPosts(PostQueryFilter filters)
         {
             filters.PageNumber = filters.PageNumber == 0 ? _paginationOptions.DefaultPageNumber : filters.PageNumber;
             filters.PageSize = filters.PageSize == 0 ? _paginationOptions.DefaultPageSize : filters.PageSize;
 
             var posts = _unitOfWork.PostRepository.GetAll();
 
-            if(filters.UserId != null)
+            //foreach (var post in posts)
+            //{
+            //    post.User = await _unitOfWork.UserRepository.GetSummaryUserByUserId(post.UserId);
+            //}
+
+            if (filters.UserId != null)
             {
                 posts = posts.Where(x=> x.UserId == filters.UserId);
             }

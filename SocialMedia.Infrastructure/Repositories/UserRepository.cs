@@ -12,5 +12,19 @@ namespace SocialMedia.Infrastructure.Repositories
     {
         public UserRepository(SocialMediaContext context) : base(context) { }
 
+        public async Task<User> GetSummaryUserByUserId(int userId)
+        {
+            return await _entities.Where(x => x.Id == userId).Select(u => new User
+            {
+                Id = u.Id,
+                FirstName = u.FirstName,
+                LastName = u.LastName,
+                Email = u.Email,
+                DateOfBirth = u.DateOfBirth,
+                Telephone = u.Telephone,
+                IsActive = u.IsActive
+            }).SingleOrDefaultAsync();
+        }
+
     }
 }
