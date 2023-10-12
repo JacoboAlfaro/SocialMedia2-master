@@ -104,6 +104,10 @@ namespace SocialMedia.Core.Services
         public async Task<bool> UpdateComment(Comment comment)
         {
             var existingComment = await _unitOfWork.CommentRepository.GetById(comment.Id);
+            if(existingComment == null)
+            {
+                throw new BusinessExceptions("Comment doesnt exist");
+            }
             existingComment.Description = comment.Description;
             existingComment.IsActive = comment.IsActive;
 
