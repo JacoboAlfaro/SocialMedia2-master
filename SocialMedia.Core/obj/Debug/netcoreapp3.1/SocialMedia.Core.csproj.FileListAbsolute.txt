@@ -37,3 +37,13 @@ C:\Users\jacob\OneDrive\Documentos\GitHub\SocialMedia2-master\SocialMedia.Core\o
 C:\Users\jacob\OneDrive\Documentos\GitHub\SocialMedia2-master\SocialMedia.Core\obj\Debug\netcoreapp3.1\SocialMedia.Core.csproj.CoreCompileInputs.cache
 C:\Users\jacob\OneDrive\Documentos\GitHub\SocialMedia2-master\SocialMedia.Core\obj\Debug\netcoreapp3.1\SocialMedia.Core.dll
 C:\Users\jacob\OneDrive\Documentos\GitHub\SocialMedia2-master\SocialMedia.Core\obj\Debug\netcoreapp3.1\SocialMedia.Core.pdb
+C:\Users\jacob\Documents\GitHub\SocialMedia2-master\SocialMedia.Core\bin\Debug\netcoreapp3.1\SocialMedia.Core.deps.json
+C:\Users\jacob\Documents\GitHub\SocialMedia2-master\SocialMedia.Core\bin\Debug\netcoreapp3.1\SocialMedia.Core.dll
+C:\Users\jacob\Documents\GitHub\SocialMedia2-master\SocialMedia.Core\bin\Debug\netcoreapp3.1\SocialMedia.Core.pdb
+C:\Users\jacob\Documents\GitHub\SocialMedia2-master\SocialMedia.Core\obj\Debug\netcoreapp3.1\SocialMedia.Core.csproj.AssemblyReference.cache
+C:\Users\jacob\Documents\GitHub\SocialMedia2-master\SocialMedia.Core\obj\Debug\netcoreapp3.1\SocialMedia.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jacob\Documents\GitHub\SocialMedia2-master\SocialMedia.Core\obj\Debug\netcoreapp3.1\SocialMedia.Core.AssemblyInfoInputs.cache
+C:\Users\jacob\Documents\GitHub\SocialMedia2-master\SocialMedia.Core\obj\Debug\netcoreapp3.1\SocialMedia.Core.AssemblyInfo.cs
+C:\Users\jacob\Documents\GitHub\SocialMedia2-master\SocialMedia.Core\obj\Debug\netcoreapp3.1\SocialMedia.Core.csproj.CoreCompileInputs.cache
+C:\Users\jacob\Documents\GitHub\SocialMedia2-master\SocialMedia.Core\obj\Debug\netcoreapp3.1\SocialMedia.Core.dll
+C:\Users\jacob\Documents\GitHub\SocialMedia2-master\SocialMedia.Core\obj\Debug\netcoreapp3.1\SocialMedia.Core.pdb

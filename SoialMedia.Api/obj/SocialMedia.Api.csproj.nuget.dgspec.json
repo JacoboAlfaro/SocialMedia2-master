@@ -1,25 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jalfaroh\\Documents\\Jacobo\\NET\\SocialMedia2-master\\SoialMedia.Api\\SocialMedia.Api.csproj": {}
+    "C:\\Users\\jacob\\Documents\\GitHub\\SocialMedia2-master\\SoialMedia.Api\\SocialMedia.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jalfaroh\\Documents\\Jacobo\\NET\\SocialMedia2-master\\SocialMedia.Core\\SocialMedia.Core.csproj": {
+    "C:\\Users\\jacob\\Documents\\GitHub\\SocialMedia2-master\\SocialMedia.Core\\SocialMedia.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jalfaroh\\Documents\\Jacobo\\NET\\SocialMedia2-master\\SocialMedia.Core\\SocialMedia.Core.csproj",
+        "projectUniqueName": "C:\\Users\\jacob\\Documents\\GitHub\\SocialMedia2-master\\SocialMedia.Core\\SocialMedia.Core.csproj",
         "projectName": "SocialMedia.Core",
-        "projectPath": "C:\\Users\\jalfaroh\\Documents\\Jacobo\\NET\\SocialMedia2-master\\SocialMedia.Core\\SocialMedia.Core.csproj",
-        "packagesPath": "C:\\Users\\jalfaroh\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jalfaroh\\Documents\\Jacobo\\NET\\SocialMedia2-master\\SocialMedia.Core\\obj\\",
+        "projectPath": "C:\\Users\\jacob\\Documents\\GitHub\\SocialMedia2-master\\SocialMedia.Core\\SocialMedia.Core.csproj",
+        "packagesPath": "C:\\Users\\jacob\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jacob\\Documents\\GitHub\\SocialMedia2-master\\SocialMedia.Core\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\jalfaroh\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\jacob\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -56,35 +51,37 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.10, 3.1.10]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\jalfaroh\\Documents\\Jacobo\\NET\\SocialMedia2-master\\SocialMedia.Infrastructure\\SocialMedia.Infrastructure.csproj": {
+    "C:\\Users\\jacob\\Documents\\GitHub\\SocialMedia2-master\\SocialMedia.Infrastructure\\SocialMedia.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jalfaroh\\Documents\\Jacobo\\NET\\SocialMedia2-master\\SocialMedia.Infrastructure\\SocialMedia.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\jacob\\Documents\\GitHub\\SocialMedia2-master\\SocialMedia.Infrastructure\\SocialMedia.Infrastructure.csproj",
         "projectName": "SocialMedia.Infrastructure",
-        "projectPath": "C:\\Users\\jalfaroh\\Documents\\Jacobo\\NET\\SocialMedia2-master\\SocialMedia.Infrastructure\\SocialMedia.Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\jalfaroh\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jalfaroh\\Documents\\Jacobo\\NET\\SocialMedia2-master\\SocialMedia.Infrastructure\\obj\\",
+        "projectPath": "C:\\Users\\jacob\\Documents\\GitHub\\SocialMedia2-master\\SocialMedia.Infrastructure\\SocialMedia.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\jacob\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jacob\\Documents\\GitHub\\SocialMedia2-master\\SocialMedia.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\jalfaroh\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\jacob\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -98,8 +95,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\jalfaroh\\Documents\\Jacobo\\NET\\SocialMedia2-master\\SocialMedia.Core\\SocialMedia.Core.csproj": {
-                "projectPath": "C:\\Users\\jalfaroh\\Documents\\Jacobo\\NET\\SocialMedia2-master\\SocialMedia.Core\\SocialMedia.Core.csproj"
+              "C:\\Users\\jacob\\Documents\\GitHub\\SocialMedia2-master\\SocialMedia.Core\\SocialMedia.Core.csproj": {
+                "projectPath": "C:\\Users\\jacob\\Documents\\GitHub\\SocialMedia2-master\\SocialMedia.Core\\SocialMedia.Core.csproj"
               }
             }
           }
@@ -151,35 +148,37 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.10, 3.1.10]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\jalfaroh\\Documents\\Jacobo\\NET\\SocialMedia2-master\\SoialMedia.Api\\SocialMedia.Api.csproj": {
+    "C:\\Users\\jacob\\Documents\\GitHub\\SocialMedia2-master\\SoialMedia.Api\\SocialMedia.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jalfaroh\\Documents\\Jacobo\\NET\\SocialMedia2-master\\SoialMedia.Api\\SocialMedia.Api.csproj",
+        "projectUniqueName": "C:\\Users\\jacob\\Documents\\GitHub\\SocialMedia2-master\\SoialMedia.Api\\SocialMedia.Api.csproj",
         "projectName": "SocialMedia.Api",
-        "projectPath": "C:\\Users\\jalfaroh\\Documents\\Jacobo\\NET\\SocialMedia2-master\\SoialMedia.Api\\SocialMedia.Api.csproj",
-        "packagesPath": "C:\\Users\\jalfaroh\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jalfaroh\\Documents\\Jacobo\\NET\\SocialMedia2-master\\SoialMedia.Api\\obj\\",
+        "projectPath": "C:\\Users\\jacob\\Documents\\GitHub\\SocialMedia2-master\\SoialMedia.Api\\SocialMedia.Api.csproj",
+        "packagesPath": "C:\\Users\\jacob\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jacob\\Documents\\GitHub\\SocialMedia2-master\\SoialMedia.Api\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\jalfaroh\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\jacob\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -193,11 +192,11 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\jalfaroh\\Documents\\Jacobo\\NET\\SocialMedia2-master\\SocialMedia.Core\\SocialMedia.Core.csproj": {
-                "projectPath": "C:\\Users\\jalfaroh\\Documents\\Jacobo\\NET\\SocialMedia2-master\\SocialMedia.Core\\SocialMedia.Core.csproj"
+              "C:\\Users\\jacob\\Documents\\GitHub\\SocialMedia2-master\\SocialMedia.Core\\SocialMedia.Core.csproj": {
+                "projectPath": "C:\\Users\\jacob\\Documents\\GitHub\\SocialMedia2-master\\SocialMedia.Core\\SocialMedia.Core.csproj"
               },
-              "C:\\Users\\jalfaroh\\Documents\\Jacobo\\NET\\SocialMedia2-master\\SocialMedia.Infrastructure\\SocialMedia.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\jalfaroh\\Documents\\Jacobo\\NET\\SocialMedia2-master\\SocialMedia.Infrastructure\\SocialMedia.Infrastructure.csproj"
+              "C:\\Users\\jacob\\Documents\\GitHub\\SocialMedia2-master\\SocialMedia.Infrastructure\\SocialMedia.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\jacob\\Documents\\GitHub\\SocialMedia2-master\\SocialMedia.Infrastructure\\SocialMedia.Infrastructure.csproj"
               }
             }
           }
@@ -241,10 +240,21 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.10, 3.1.10]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[3.1.32, 3.1.32]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -253,7 +263,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
