@@ -32,6 +32,8 @@ namespace SocialMedia.Core.Services
 
             var posts = await _unitOfWork.PostRepository.GetSummaryPostsByUserId(id);
             user.Posts = posts.ToList();
+            var comments = await _unitOfWork.CommentRepository.GetSummaryCommentsByUserId(id);
+            user.Comments = comments.ToList();
 
             return user;
 
