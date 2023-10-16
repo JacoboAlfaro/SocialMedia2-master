@@ -10,6 +10,7 @@ namespace SocialMedia.Core.Interfaces
     {
         Task<IEnumerable<Post>> GetPostsByUser(int UserId);
         Task<IEnumerable<Post>> GetSummaryPostsByUserId(int userId);
+        Task<Post> GetSummaryPostByPostId(int id);
 
     }
 }

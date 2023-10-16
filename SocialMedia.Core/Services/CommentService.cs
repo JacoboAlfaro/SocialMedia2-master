@@ -28,7 +28,8 @@ namespace SocialMedia.Core.Services
         public async Task<Comment> GetComment(int id)
         {
             Comment comment = await _unitOfWork.CommentRepository.GetById(id);
-            //comment.User = await _unitOfWork.UserRepository.GetSummaryUserByUserId(comment.UserId);
+            comment.User = await _unitOfWork.UserRepository.GetSummaryUserByUserId(comment.UserId);
+            comment.Post = await _unitOfWork.PostRepository.GetSummaryPostByPostId(comment.PostId);
             return comment;
         }
 
@@ -60,8 +61,15 @@ namespace SocialMedia.Core.Services
                 comments = comments.Where(x => x.IsActive == filters.IsActive);
             }
 
-            var pagedUser = PagedList<Comment>.Create(comments, filters.PageNumber, filters.PageSize);
-            return pagedUser;
+            var pagedComments = PagedList<Comment>.Create(comments, filters.PageNumber, filters.PageSize);
+
+            foreach (var comment in pagedComments)
+            {
+                comment.User = await _unitOfWork.UserRepository.GetSummaryUserByUserId(comment.UserId);
+                comment.Post = await _unitOfWork.PostRepository.GetSummaryPostByPostId(comment.PostId);
+            }
+
+            return pagedComments;
         }
 
         public async Task InsertComment(Comment comment)

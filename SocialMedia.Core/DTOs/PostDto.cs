@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SocialMedia.Core.Entities;
+using System;
+using System.Collections.Generic;
 
 namespace SocialMedia.Core.DTOs
 {
@@ -13,5 +15,6 @@ namespace SocialMedia.Core.DTOs
         public string Description { get; set; }
         public string Image { get; set; }
         public virtual UserDto User { get; set; }
+        public virtual ICollection<CommentDto> Comments { get; set; }
     }
 }

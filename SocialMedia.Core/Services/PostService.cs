@@ -29,6 +29,8 @@ namespace SocialMedia.Core.Services
         {
             Post post = await _unitOfWork.PostRepository.GetById(id);
             post.User = await _unitOfWork.UserRepository.GetSummaryUserByUserId(post.UserId);
+            var comments = await _unitOfWork.CommentRepository.GetCommentsByPostId(id);
+            post.Comments = comments.ToList();
             return post;
         }
 
@@ -39,10 +41,6 @@ namespace SocialMedia.Core.Services
 
             var posts = _unitOfWork.PostRepository.GetAll();
 
-            //foreach (var post in posts)
-            //{
-            //    post.User = await _unitOfWork.UserRepository.GetSummaryUserByUserId(post.UserId);
-            //}
 
             if (filters.UserId != null)
             {
@@ -58,6 +56,13 @@ namespace SocialMedia.Core.Services
             }
 
             var pagedPost = PagedList<Post>.Create(posts, filters.PageNumber, filters.PageSize);
+
+            foreach (var post in pagedPost)
+            {
+                post.User = await _unitOfWork.UserRepository.GetSummaryUserByUserId(post.UserId);
+                var comments = await _unitOfWork.CommentRepository.GetCommentsByPostId(post.Id);
+                post.Comments = comments.ToList();
+            }
             return pagedPost;
         }
 

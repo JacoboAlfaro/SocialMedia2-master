@@ -8,7 +8,7 @@ namespace SocialMedia.Core.Interfaces
     {
         IPostRepository PostRepository { get; }
         IUserRepository UserRepository { get; }
-        IRepository<Comment> CommentRepository { get; }
+        ICommentRepository CommentRepository { get; }
         ISecurityRepository SecurityRepository { get; }
 
         void SaveChanges();
