@@ -14,7 +14,7 @@ namespace SocialMedia.Core.DTOs
         public DateTime? Date { get; set; }
         public bool? IsActive { get; set; }
 
-        //public virtual PostDto Post { get; set; }
-        //public virtual UserDto User { get; set; }
+        public virtual PostDto Post { get; set; }
+        public virtual UserDto User { get; set; }
     }
 }
