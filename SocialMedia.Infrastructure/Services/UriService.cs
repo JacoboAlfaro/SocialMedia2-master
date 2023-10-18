@@ -29,5 +29,10 @@ namespace SocialMedia.Infrastructure.Services
             string baseUrl = $"{_baseUri}{actionUrl}?pageNumber={currentPage}";
             return new Uri(baseUrl);
         }
+        public Uri GetLoginsPaginationUri(SecurityQueryFilter filter, string actionUrl, int currentPage)
+        {
+            string baseUrl = $"{_baseUri}{actionUrl}?pageNumber={currentPage}";
+            return new Uri(baseUrl);
+        }
     }
 }

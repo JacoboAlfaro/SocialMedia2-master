@@ -1,4 +1,6 @@
-﻿using SocialMedia.Core.Entities;
+﻿using SocialMedia.Core.CustomEntities;
+using SocialMedia.Core.Entities;
+using SocialMedia.Core.QueryFilters;
 using System.Threading.Tasks;
 
 namespace SocialMedia.Core.Interfaces
@@ -7,5 +9,6 @@ namespace SocialMedia.Core.Interfaces
     {
         Task<Security> GetLoginByCredentials(UserLogin userLogin);
         Task RegisterUser(Security security);
+        PagedList<Security> GetLogins(SecurityQueryFilter filters);
     }
 }

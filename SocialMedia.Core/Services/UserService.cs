@@ -43,11 +43,6 @@ namespace SocialMedia.Core.Services
 
             var users = _unitOfWork.UserRepository.GetAll();
 
-            //foreach (var user in users){
-            //    var posts =  _unitOfWork.PostRepository.GetPostsByUser(user.Id);
-            //    user.Posts = posts.ToList();
-            //}
-
 
             if (filters.FirstName != null)
             {

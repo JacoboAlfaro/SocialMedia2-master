@@ -1,7 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SocialMedia.Core.Entities;
+using SocialMedia.Core.Enumerations;
 using SocialMedia.Core.Interfaces;
 using SocialMedia.Infrastructure.Data;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SocialMedia.Infrastructure.Repositories
@@ -14,5 +18,18 @@ namespace SocialMedia.Infrastructure.Repositories
         {
             return await _entities.FirstOrDefaultAsync(x => x.User == login.User);
         }
+
+        //public IEnumerable<Security> GetAllLogins()
+        //{
+        //    return _entities.Select(p => new Security
+        //    {
+        //        Id = p.Id,
+        //        User = p.User,
+        //        UserName = p.UserName,
+        //        Password = p.Password,
+        //        Role = (RoleType)Enum.Parse(typeof(RoleType), p.Role.ToString())
+
+        //    }).AsEnumerable();
+        //}
     }
 }
