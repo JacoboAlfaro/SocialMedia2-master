@@ -8,7 +8,6 @@ namespace SocialMedia.Infrastructure.Interfaces
         Uri GetPostPaginationUri(PostQueryFilter filter, string actionUrl, int currentPage);
         Uri GetUserPaginationUri(UserQueryFilter filter, string actionUrl, int currentPage);
         Uri GetCommentPaginationUri(CommentQueryFilter filter, string actionUrl, int currentPage);
-
-
+        Uri GetLoginsPaginationUri(SecurityQueryFilter filter, string actionUrl, int currentPage);
     }
 }
