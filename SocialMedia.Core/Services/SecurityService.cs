@@ -31,6 +31,7 @@ namespace SocialMedia.Core.Services
             {
                 throw new BusinessExceptions("Login doesn't exist");
             }
+            login.User = await _unitOfWork.UserRepository.GetSummaryUserByUserId(login.UserId);
             return login;
         }
         public async Task<Security> GetLoginByCredentials(UserLogin userLogin)
@@ -49,16 +50,16 @@ namespace SocialMedia.Core.Services
             await _unitOfWork.SecurityRepository.Add(security);
             await _unitOfWork.SaveChangesAsync();
         }
-        public PagedList<Security> GetLogins(SecurityQueryFilter filters)
+        public async Task<PagedList<Security>> GetLogins(SecurityQueryFilter filters)
         {
             filters.PageNumber = filters.PageNumber == 0 ? _paginationOptions.DefaultPageNumber : filters.PageNumber;
             filters.PageSize = filters.PageSize == 0 ? _paginationOptions.DefaultPageSize : filters.PageSize;
 
             var logins = _unitOfWork.SecurityRepository.GetAll();
 
-            if (filters.User != null)
+            if (filters.UserLogin != null)
             {
-                logins = logins.Where(x => x.User.ToLower() == filters.User.ToLower());
+                logins = logins.Where(x => x.UserLogin.ToLower() == filters.UserLogin.ToLower());
             }
             if (filters.UserName != null)
             {
@@ -69,8 +70,12 @@ namespace SocialMedia.Core.Services
             {
                 logins = logins.Where(x => x.Role.ToString() == filters.Role.ToString());
             }
-            var pagedUser = PagedList<Security>.Create(logins, filters.PageNumber, filters.PageSize);
-            return pagedUser;
+            var pagedLogins = PagedList<Security>.Create(logins, filters.PageNumber, filters.PageSize);
+            foreach(var login in pagedLogins)
+            {
+                login.User = await _unitOfWork.UserRepository.GetSummaryUserByUserId(login.UserId);
+            }
+            return pagedLogins;
         }
     }
 }

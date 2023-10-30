@@ -35,7 +35,7 @@ namespace SocialMedia.Api.Controllers
         }
 
         /// <summary>
-        /// Retrieve all posts
+        /// Permite obtener todos los Posts
         /// </summary>
         /// <param name="filters">Filters to apply</param>
         /// <returns></returns>
@@ -70,6 +70,11 @@ namespace SocialMedia.Api.Controllers
             return Ok(response);
         }
 
+        /// <summary>
+        /// Permite obtener un Post por su Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPost(int id)
         {
@@ -79,6 +84,11 @@ namespace SocialMedia.Api.Controllers
             return Ok(response);
         }
 
+        /// <summary>
+        /// Permite crear un Post
+        /// </summary>
+        /// <param name="postDto"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Post(PostDto postDto)
         {
@@ -91,6 +101,12 @@ namespace SocialMedia.Api.Controllers
             return Ok(response);
         }
 
+        /// <summary>
+        /// Permite actualizar un Post por su Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="postDto"></param>
+        /// <returns></returns>
         [HttpPut]
         public async Task<IActionResult> Put(int id, PostDto postDto)
         {
@@ -102,6 +118,11 @@ namespace SocialMedia.Api.Controllers
             return Ok(response);
         }
 
+        /// <summary>
+        /// Permite eliminar un Post por su Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

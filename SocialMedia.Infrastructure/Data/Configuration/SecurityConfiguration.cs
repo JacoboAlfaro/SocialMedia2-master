@@ -19,11 +19,15 @@ namespace SocialMedia.Infrastructure.Data.Configuration
             builder.Property(e => e.Id)
                 .HasColumnName("IdSeguridad");
 
-            builder.Property(e => e.User)
+            builder.Property(e => e.UserLogin)
                 .HasColumnName("Usuario")
                 .IsRequired()
                 .HasMaxLength(50)
                 .IsUnicode(false);
+
+            builder.Property(e => e.UserId)
+                .HasColumnName("IdUsuario")
+                .IsRequired();
 
             builder.Property(e => e.UserName)
                 .HasColumnName("NombreUsuario")
@@ -45,8 +49,11 @@ namespace SocialMedia.Infrastructure.Data.Configuration
                 x => x.ToString(),
                 x => (RoleType)Enum.Parse(typeof(RoleType), x)
                 );
-                
-
+            builder.HasOne(d => d.User)
+                .WithOne(p => p.Security)
+                .HasForeignKey<Security>(s => s.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Seguridad_Usuario");
         }
     }
 }

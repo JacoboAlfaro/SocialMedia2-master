@@ -34,7 +34,7 @@ namespace SocialMedia.Api.Controllers
         }
 
         /// <summary>
-        /// Retrieve all posts
+        /// Permite obtener todos los Usuarios
         /// </summary>
         /// <param name="filters">Filters to apply</param>
         /// <returns></returns>
@@ -69,6 +69,11 @@ namespace SocialMedia.Api.Controllers
             return Ok(response);
         }
 
+        /// <summary>
+        /// Permite obtener un Usuario por su Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUser(int id)
         {
@@ -78,6 +83,11 @@ namespace SocialMedia.Api.Controllers
             return Ok(response);
         }
 
+        /// <summary>
+        /// Permite crear un Usuario
+        /// </summary>
+        /// <param name="userDto"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Post(UserDto userDto)
         {
@@ -88,6 +98,12 @@ namespace SocialMedia.Api.Controllers
             return Ok(response);
         }
 
+        /// <summary>
+        /// Permite actualizar un Usuario por su Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="userDto"></param>
+        /// <returns></returns>
         [HttpPut]
         public async Task<IActionResult> Put(int id, UserDto userDto)
         {
@@ -99,6 +115,11 @@ namespace SocialMedia.Api.Controllers
             return Ok(response);
         }
 
+        /// <summary>
+        /// Permite eliminar un Usuario por su Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

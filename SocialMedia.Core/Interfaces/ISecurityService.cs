@@ -7,9 +7,10 @@ namespace SocialMedia.Core.Interfaces
 {
     public interface ISecurityService
     {
+        Task<PagedList<Security>> GetLogins(SecurityQueryFilter filters);
+        Task<Security> GetLogin(int id);
         Task<Security> GetLoginByCredentials(UserLogin userLogin);
         Task RegisterUser(Security security);
-        PagedList<Security> GetLogins(SecurityQueryFilter filters);
-        Task<Security> GetLogin(int id);
+        
     }
 }

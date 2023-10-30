@@ -28,6 +28,11 @@ namespace SocialMedia.Api.Controllers
             _passwordService = passwordService;
         }
 
+        /// <summary>
+        /// Permite generar el token de acceso
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
         [HttpPost]
         public  async Task<IActionResult> Authentication(UserLogin login)
         {
@@ -57,7 +62,7 @@ namespace SocialMedia.Api.Controllers
             var claims = new[]
             {
                 new Claim(ClaimTypes.Name, security.UserName),
-                new Claim("User", security.User),
+                new Claim("User", security.UserLogin),
                 new Claim(ClaimTypes.Role, security.Role.ToString()),
             };
 

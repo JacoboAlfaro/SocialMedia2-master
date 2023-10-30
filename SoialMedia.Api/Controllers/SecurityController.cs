@@ -39,28 +39,28 @@ namespace SocialMedia.Api.Controllers
         }
 
         /// <summary>
-        /// Retrieve all posts
+        /// Permite obtener todos los Logins
         /// </summary>
         /// <param name="filters">Filters to apply</param>
         /// <returns></returns>
         [HttpGet(Name = nameof(GetLogins))]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<IEnumerable<PostDto>>))]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public IActionResult GetLogins([FromQuery] SecurityQueryFilter filters)
+        public async Task<IActionResult> GetLogins([FromQuery] SecurityQueryFilter filters)
         {
-            var users = _securityService.GetLogins(filters);
-            var loginsDtos = _mapper.Map<IEnumerable<SecurityDto>>(users);
+            var logins = await _securityService.GetLogins(filters);
+            var loginsDtos = _mapper.Map<IEnumerable<SecurityDto>>(logins);
 
             var metadata = new MetaData
             {
-                TotalCount = users.TotalCount,
-                PageSize = users.PageSize,
-                CurrentPage = users.CurrentPage,
-                TotalPages = users.TotalPages,
-                HasNextPage = users.HasNextPage,
-                HasPreviousPage = users.HasPreviousPage,
-                NextPageUrl = _uriService.GetLoginsPaginationUri(filters, Url.RouteUrl(nameof(GetLogins)), users.CurrentPage + 1).ToString(),
-                PreviousPageUrl = _uriService.GetLoginsPaginationUri(filters, Url.RouteUrl(nameof(GetLogins)), users.CurrentPage - 1).ToString()
+                TotalCount = logins.TotalCount,
+                PageSize = logins.PageSize,
+                CurrentPage = logins.CurrentPage,
+                TotalPages = logins.TotalPages,
+                HasNextPage = logins.HasNextPage,
+                HasPreviousPage = logins.HasPreviousPage,
+                NextPageUrl = _uriService.GetLoginsPaginationUri(filters, Url.RouteUrl(nameof(GetLogins)), logins.CurrentPage + 1).ToString(),
+                PreviousPageUrl = _uriService.GetLoginsPaginationUri(filters, Url.RouteUrl(nameof(GetLogins)), logins.CurrentPage - 1).ToString()
 
             };
             var response = new ApiResponse<IEnumerable<SecurityDto>>(loginsDtos)
@@ -73,6 +73,11 @@ namespace SocialMedia.Api.Controllers
             return Ok(response);
         }
 
+        /// <summary>
+        /// Permite crear un Login
+        /// </summary>
+        /// <param name="securityDto"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Post(SecurityDto securityDto)
         {
@@ -86,6 +91,11 @@ namespace SocialMedia.Api.Controllers
             return Ok(response);
         }
 
+        /// <summary>
+        /// Permite obtener un Login por su Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> getLoginById(int id)
         {

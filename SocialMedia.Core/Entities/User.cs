@@ -19,6 +19,8 @@ namespace SocialMedia.Core.Entities
 
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
+        public virtual Security Security { get; set; }
+
 
     }
 }

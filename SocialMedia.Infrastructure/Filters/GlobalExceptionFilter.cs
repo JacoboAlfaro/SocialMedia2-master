@@ -18,7 +18,7 @@ namespace SocialMedia.Infrastructure.Filters
                 var validation = new
                 {
                     Status = 400,
-                    Tittle = "Bad requestt",
+                    Tittle = "Bad request texto",
                     Detail = exception.Message
                 };
                 var json = new
