@@ -38,7 +38,7 @@ namespace SocialMedia.Core.Services
             return user;
 
         }
-        public PagedList<User> GetUsers(UserQueryFilter filters)
+        public async Task<PagedList<User>> GetUsers(UserQueryFilter filters)
         {
             filters.PageNumber = filters.PageNumber == 0 ? _paginationOptions.DefaultPageNumber : filters.PageNumber;
             filters.PageSize = filters.PageSize == 0 ? _paginationOptions.DefaultPageSize : filters.PageSize;
@@ -66,8 +66,14 @@ namespace SocialMedia.Core.Services
             {
                 users = users.Where(x => x.IsActive == filters.IsActive.Value);
             }
-
             var pagedUser = PagedList<User>.Create(users, filters.PageNumber, filters.PageSize);
+            foreach(var user in pagedUser)
+            {
+                var posts = await _unitOfWork.PostRepository.GetSummaryPostsByUserId(user.Id);
+                user.Posts = posts.ToList();
+                var comments = await _unitOfWork.CommentRepository.GetSummaryCommentsByUserId(user.Id);
+                user.Comments = comments.ToList();
+            }
             return pagedUser;
         }
 

@@ -10,5 +10,6 @@ namespace SocialMedia.Core.Interfaces
         Task<Security> GetLoginByCredentials(UserLogin userLogin);
         Task RegisterUser(Security security);
         PagedList<Security> GetLogins(SecurityQueryFilter filters);
+        Task<Security> GetLogin(int id);
     }
 }

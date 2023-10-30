@@ -42,9 +42,9 @@ namespace SocialMedia.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<IEnumerable<UserDto>>))]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
 
-        public IActionResult GetUsers([FromQuery] UserQueryFilter filters)
+        public async Task<IActionResult> GetUsers([FromQuery] UserQueryFilter filters)
         {
-            var users = _userService.GetUsers(filters);
+            var users = await _userService.GetUsers(filters);
             var usersDtos = _mapper.Map<IEnumerable<UserDto>>(users);
 
             var metadata = new MetaData

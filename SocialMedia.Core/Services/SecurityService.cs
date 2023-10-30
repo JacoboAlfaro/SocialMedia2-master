@@ -23,6 +23,16 @@ namespace SocialMedia.Core.Services
             _paginationOptions = options.Value;
 
         }
+        public async Task<Security> GetLogin(int id)
+        {
+            var login = await _unitOfWork.SecurityRepository.GetById(id);
+
+            if (login == null)
+            {
+                throw new BusinessExceptions("Login doesn't exist");
+            }
+            return login;
+        }
         public async Task<Security> GetLoginByCredentials(UserLogin userLogin)
         {
             return await _unitOfWork.SecurityRepository.GetLoginByCredentials(userLogin);

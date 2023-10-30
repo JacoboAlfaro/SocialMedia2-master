@@ -38,19 +38,6 @@ namespace SocialMedia.Api.Controllers
             _uriService = uriService;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Post(SecurityDto securityDto)
-        {
-            var security = _mapper.Map<Security>(securityDto);
-
-            security.Password = _passwordService.Hash(security.Password);
-            await _securityService.RegisterUser(security);
-
-            securityDto = _mapper.Map<SecurityDto>(security);
-            var response = new ApiResponse<SecurityDto>(securityDto);
-            return Ok(response);
-        }
-
         /// <summary>
         /// Retrieve all posts
         /// </summary>
@@ -83,6 +70,28 @@ namespace SocialMedia.Api.Controllers
 
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
 
+            return Ok(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post(SecurityDto securityDto)
+        {
+            var security = _mapper.Map<Security>(securityDto);
+
+            security.Password = _passwordService.Hash(security.Password);
+            await _securityService.RegisterUser(security);
+
+            securityDto = _mapper.Map<SecurityDto>(security);
+            var response = new ApiResponse<SecurityDto>(securityDto);
+            return Ok(response);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> getLoginById(int id)
+        {
+            var login = await _securityService.GetLogin(id);
+            var SecurityDto = _mapper.Map<SecurityDto>(login);
+            var response = new ApiResponse<SecurityDto>(SecurityDto);
             return Ok(response);
         }
     }

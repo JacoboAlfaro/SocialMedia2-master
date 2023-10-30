@@ -7,7 +7,7 @@ namespace SocialMedia.Core.Services
 {
     public interface IUserService
     {
-        PagedList<User> GetUsers(UserQueryFilter filters);
+        Task<PagedList<User>> GetUsers(UserQueryFilter filters);
         Task<User> GetUser(int id);
         Task InsertUser(User user);
         Task<bool> UpdateUser(User user);
