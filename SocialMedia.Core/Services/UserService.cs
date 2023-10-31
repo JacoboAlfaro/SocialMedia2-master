@@ -105,6 +105,10 @@ namespace SocialMedia.Core.Services
         public async Task<bool> UpdateUser(User user)
         {
             var existingUser = await _unitOfWork.UserRepository.GetById(user.Id);
+            if (existingUser == null)
+            {
+                throw new BusinessExceptions("User doesn't exist to update");
+            }
             existingUser.FirstName = user.FirstName;
             existingUser.LastName = user.LastName;
             existingUser.Telephone = user.Telephone;
@@ -118,6 +122,12 @@ namespace SocialMedia.Core.Services
 
         public async Task<bool> DeleteUser(int id)
         {
+            var user = await _unitOfWork.UserRepository.GetById(id);
+
+            if (user == null)
+            {
+                throw new BusinessExceptions("User doesn't exist to delete");
+            }
             await _unitOfWork.UserRepository.Delete(id);
             await _unitOfWork.SaveChangesAsync();
             return true;

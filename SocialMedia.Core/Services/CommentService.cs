@@ -28,6 +28,12 @@ namespace SocialMedia.Core.Services
         public async Task<Comment> GetComment(int id)
         {
             Comment comment = await _unitOfWork.CommentRepository.GetById(id);
+
+            if (comment == null)
+            {
+                throw new BusinessExceptions("Comment doesn't exist");
+            }
+
             comment.User = await _unitOfWork.UserRepository.GetSummaryUserByUserId(comment.UserId);
             comment.Post = await _unitOfWork.PostRepository.GetSummaryPostByPostId(comment.PostId);
             return comment;
@@ -114,7 +120,7 @@ namespace SocialMedia.Core.Services
             var existingComment = await _unitOfWork.CommentRepository.GetById(comment.Id);
             if(existingComment == null)
             {
-                throw new BusinessExceptions("Comment doesnt exist");
+                throw new BusinessExceptions("Comment doesnt exist to update");
             }
             existingComment.Description = comment.Description;
             existingComment.IsActive = comment.IsActive;
@@ -126,6 +132,12 @@ namespace SocialMedia.Core.Services
 
         public async Task<bool> DeleteComment(int id)
         {
+            Comment comment = await _unitOfWork.CommentRepository.GetById(id);
+
+            if (comment == null)
+            {
+                throw new BusinessExceptions("Comment doesn't exist to delete");
+            }
             await _unitOfWork.CommentRepository.Delete(id);
             await _unitOfWork.SaveChangesAsync();
             return true;

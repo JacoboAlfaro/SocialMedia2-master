@@ -28,6 +28,12 @@ namespace SocialMedia.Core.Services
         public async Task<Post> GetPost(int id)
         {
             Post post = await _unitOfWork.PostRepository.GetById(id);
+
+            if (post == null)
+            {
+                throw new BusinessExceptions("Post doesn't exist");
+            }
+
             post.User = await _unitOfWork.UserRepository.GetSummaryUserByUserId(post.UserId);
             var comments = await _unitOfWork.CommentRepository.GetCommentsByPostId(id);
             post.Comments = comments.ToList();
@@ -101,6 +107,12 @@ namespace SocialMedia.Core.Services
         public async Task<bool> UpdatePost(Post post)
         {
             var existingPost = await _unitOfWork.PostRepository.GetById(post.Id);
+
+            if (existingPost == null)
+            {
+                throw new BusinessExceptions("Post doesn't exist to update");
+            }
+
             existingPost.Image = post.Image;
             existingPost.Description = post.Description;
 
@@ -111,6 +123,12 @@ namespace SocialMedia.Core.Services
 
         public async Task<bool> DeletePost(int id)
         {
+            Post post = await _unitOfWork.PostRepository.GetById(id);
+
+            if (post == null)
+            {
+                throw new BusinessExceptions("Post doesn't exist to delete");
+            }
             await _unitOfWork.PostRepository.Delete(id);
             await _unitOfWork.SaveChangesAsync();
             return true;
