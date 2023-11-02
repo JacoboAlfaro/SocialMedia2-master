@@ -61,9 +61,10 @@ namespace SocialMedia.Api.Controllers
             //Claims
             var claims = new[]
             {
-                new Claim(ClaimTypes.Name, security.UserName),
+                new Claim("UserName", security.UserName),
                 new Claim("User", security.UserLogin),
-                new Claim(ClaimTypes.Role, security.Role.ToString()),
+                new Claim("UserId", security.UserId.ToString()),
+                new Claim("Role", security.Role.ToString()),
             };
 
             //Payload
