@@ -1,6 +1,6 @@
 ﻿namespace SocialMedia.Core.Enumerations
 {
-    public enum  RoleType
+    public enum RoleType
     {
         Administrator,
         Consumer,

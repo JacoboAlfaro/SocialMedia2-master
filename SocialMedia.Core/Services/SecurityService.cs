@@ -41,9 +41,8 @@ namespace SocialMedia.Core.Services
 
         public async Task RegisterUser(Security security)
         {
-            var roles = Enum.GetValues(typeof(RoleType));
-
-            if (security.Role.GetType() != roles.GetType())
+            //agregar validacion del nombre de usuario que debe ser unico y ponerlo en db como unico, manejar tambien el usuario unico 
+            if (!Enum.IsDefined(typeof(RoleType), security.Role))
             {
                 throw new BusinessExceptions("Rol no existente");
             }
