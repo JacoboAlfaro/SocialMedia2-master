@@ -1,16 +1,12 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SocialMedia.Api.Responses;
 using SocialMedia.Core.CustomEntities;
 using SocialMedia.Core.DTOs;
 using SocialMedia.Core.Entities;
-using SocialMedia.Core.Enumerations;
 using SocialMedia.Core.Interfaces;
 using SocialMedia.Core.QueryFilters;
-using SocialMedia.Core.Services;
 using SocialMedia.Infrastructure.Interfaces;
 using System.Collections.Generic;
 using System.Net;
@@ -18,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace SocialMedia.Api.Controllers
 {
-    [Authorize(Roles = nameof(RoleType.Administrator))]
+    //[Authorize(Roles = nameof(RoleType.Administrator))]
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
@@ -44,7 +40,7 @@ namespace SocialMedia.Api.Controllers
         /// <param name="filters">Filters to apply</param>
         /// <returns></returns>
         [HttpGet(Name = nameof(GetLogins))]
-        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<IEnumerable<PostDto>>))]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<IEnumerable<SecurityDto>>))]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> GetLogins([FromQuery] SecurityQueryFilter filters)
         {

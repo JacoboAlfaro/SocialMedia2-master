@@ -122,6 +122,19 @@ namespace SocialMedia.Api.Controllers
             var response = new ApiResponse<bool>(result);
             return Ok(response);
         }
+        /// <summary>
+        /// Permite agregarle un like al comentario seleccionado
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> AddLike(int id)
+        {
+            var post = await _commentService.GetComment(id);
+            var result = await _commentService.NewCommentLike(post);
+            var response = new ApiResponse<bool>(result);
+            return Ok(response);
+        }
 
         /// <summary>
         /// Permite eliminar un Comentario por su Id

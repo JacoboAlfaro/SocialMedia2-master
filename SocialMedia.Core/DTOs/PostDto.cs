@@ -14,6 +14,8 @@ namespace SocialMedia.Core.DTOs
         public DateTime? Date { get; set; }
         public string Description { get; set; }
         public string Image { get; set; }
+        public int Likes { get; set; }
+
         public virtual UserDto User { get; set; }
         public virtual ICollection<CommentDto> Comments { get; set; }
     }

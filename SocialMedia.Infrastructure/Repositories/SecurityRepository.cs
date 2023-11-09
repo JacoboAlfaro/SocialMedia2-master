@@ -18,18 +18,5 @@ namespace SocialMedia.Infrastructure.Repositories
         {
             return await _entities.FirstOrDefaultAsync(x => x.UserLogin == login.User);
         }
-
-        //public IEnumerable<Security> GetAllLogins()
-        //{
-        //    return _entities.Select(p => new Security
-        //    {
-        //        Id = p.Id,
-        //        User = p.User,
-        //        UserName = p.UserName,
-        //        Password = p.Password,
-        //        Role = (RoleType)Enum.Parse(typeof(RoleType), p.Role.ToString())
-
-        //    }).AsEnumerable();
-        //}
     }
 }

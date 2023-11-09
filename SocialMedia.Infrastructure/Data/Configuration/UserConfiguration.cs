@@ -44,6 +44,9 @@ namespace SocialMedia.Infrastructure.Data.Configuration
 
             builder.Property(e => e.IsActive)
                 .HasColumnName("Activo");
+
+            builder.Property(e => e.Followers)
+                .HasColumnName("Seguidores");
         }
     }
 }

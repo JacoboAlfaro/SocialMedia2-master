@@ -46,7 +46,7 @@ namespace SocialMedia.Infrastructure.Validators
             RuleFor(User => User.DateOfBirth)
                 .NotNull()
                 .LessThan(DateTime.Now)
-                .WithMessage("La fehca de nacimiento no puede ser superior a la actual");
+                .WithMessage("La fecha de nacimiento no puede ser superior a la actual");
 
         }
     }

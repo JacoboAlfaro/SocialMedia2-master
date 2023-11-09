@@ -13,9 +13,10 @@ namespace SocialMedia.Core.DTOs
         public DateTime? DateOfBirth { get; set; }
         public string Telephone { get; set; }
         public bool? IsActive { get; set; }
+        public int Followers { get; set; }
 
-        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<CommentDto> Comments { get; set; }
         public virtual ICollection<PostDto> Posts { get; set; }
-        public virtual SecurityDto Security { get; set; }
+        //public virtual SecurityDto Security { get; set; }
     }
 }

@@ -21,7 +21,7 @@ namespace SocialMedia.Infrastructure.Validators
             RuleFor(Comment => Comment.Date)
                 .NotNull()
                 .LessThan(DateTime.Now)
-                .WithMessage("La fehca de nacimiento no puede ser superior a la actual");
+                .WithMessage("La fecha no puede ser superior a la actual");
         }
     }
 }
