@@ -61,7 +61,8 @@ namespace SocialMedia.Api.Controllers
             };
             var response = new ApiResponse<IEnumerable<UserDto>>(usersDtos)
             {
-                Meta = metadata
+                Meta = metadata,
+                Response = "Exitoso"
             };
 
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
@@ -80,6 +81,7 @@ namespace SocialMedia.Api.Controllers
             var user = await _userService.GetUser(id);
             var userDto = _mapper.Map<UserDto>(user);
             var response = new ApiResponse<UserDto>(userDto);
+            response.Response = "Exitoso";
             return Ok(response);
         }
 
@@ -88,15 +90,15 @@ namespace SocialMedia.Api.Controllers
         /// </summary>
         /// <param name="userDto"></param>
         /// <returns></returns>
-        [HttpPost]
-        public async Task<IActionResult> Post(UserDto userDto)
-        {
-            var user = _mapper.Map<User>(userDto);
-            await _userService.InsertUser(user);
-            userDto = _mapper.Map<UserDto>(user);
-            var response = new ApiResponse<UserDto>(userDto);
-            return Ok(response);
-        }
+        //[HttpPost]
+        //public async Task<IActionResult> Post(UserDto userDto)
+        //{
+        //    var user = _mapper.Map<User>(userDto);
+        //    await _userService.InsertUser(user);
+        //    userDto = _mapper.Map<UserDto>(user);
+        //    var response = new ApiResponse<UserDto>(userDto);
+        //    return Ok(response);
+        //}
 
         /// <summary>
         /// Permite actualizar un Usuario por su Id
@@ -112,6 +114,7 @@ namespace SocialMedia.Api.Controllers
 
             var result = await _userService.UpdateUser(user);
             var response = new ApiResponse<bool>(result);
+            response.Response = "Exitoso";
             return Ok(response);
         }
 
@@ -125,6 +128,7 @@ namespace SocialMedia.Api.Controllers
         {
             var result = await _userService.DeleteUser(id);
             var response = new ApiResponse<bool>(result);
+            response.Response = "Exitoso";
             return Ok(response);
         }
     }

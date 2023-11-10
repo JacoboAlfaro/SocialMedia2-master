@@ -23,7 +23,7 @@ namespace SocialMedia.Infrastructure.Filters
                 };
                 var json = new
                 {
-                    errors = new[] { validation }
+                    errors = new { validation }
                 };
                 context.Result = new BadRequestObjectResult(json);
                 context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;

@@ -18,24 +18,26 @@ using System.Threading.Tasks;
 
 namespace SocialMedia.Api.Controllers
 {
-    [Authorize(Roles = nameof(RoleType.Administrator))]
+    //[Authorize(Roles = nameof(RoleType.Administrator))]
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class SecurityController : ControllerBase
     {
         private readonly ISecurityService _securityService;
+        private readonly IUserService _userService;
         private readonly IMapper _mapper;
         private readonly IPasswordService _passwordService;
         private readonly IUriService _uriService;
 
 
-        public SecurityController(ISecurityService securityService, IMapper mapper, IPasswordService passwordService, IUriService uriService)
+        public SecurityController(ISecurityService securityService, IMapper mapper, IPasswordService passwordService, IUriService uriService, IUserService userService)
         {
             _securityService = securityService;
             _mapper = mapper;
             _passwordService = passwordService;
             _uriService = uriService;
+            _userService = userService;
         }
 
         /// <summary>
@@ -65,8 +67,10 @@ namespace SocialMedia.Api.Controllers
             };
             var response = new ApiResponse<IEnumerable<SecurityDto>>(loginsDtos)
             {
-                Meta = metadata
-            };
+                Meta = metadata,
+                Response = "Exitoso"
+
+        };
 
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
 
@@ -88,6 +92,7 @@ namespace SocialMedia.Api.Controllers
 
             securityDto = _mapper.Map<SecurityDto>(security);
             var response = new ApiResponse<SecurityDto>(securityDto);
+            response.Response = "Exitoso";
             return Ok(response);
         }
 
@@ -102,6 +107,7 @@ namespace SocialMedia.Api.Controllers
             var login = await _securityService.GetLogin(id);
             var SecurityDto = _mapper.Map<SecurityDto>(login);
             var response = new ApiResponse<SecurityDto>(SecurityDto);
+            response.Response = "Exitoso";
             return Ok(response);
         }
     }

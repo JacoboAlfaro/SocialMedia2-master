@@ -8,8 +8,10 @@ namespace SocialMedia.Api.Responses
         {
             Data = data;
         }
+        public string Response { get; set; }
         public T Data { get; set; }
         public MetaData Meta { get; set; }
-        
+
+
     }
 }
