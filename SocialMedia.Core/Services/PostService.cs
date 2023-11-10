@@ -121,6 +121,22 @@ namespace SocialMedia.Core.Services
             return true;
         }
 
+        public async Task<bool> NewLike(Post post)
+        {
+            var existingPost = await _unitOfWork.PostRepository.GetById(post.Id);
+
+            if (existingPost == null)
+            {
+                throw new BusinessExceptions("Post doesn't exist to update");
+            }
+
+            existingPost.Likes = post.Likes + 1;
+
+            _unitOfWork.PostRepository.Update(existingPost);
+            await _unitOfWork.SaveChangesAsync();
+            return true;
+        }
+
         public async Task<bool> DeletePost(int id)
         {
             Post post = await _unitOfWork.PostRepository.GetById(id);

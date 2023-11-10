@@ -119,6 +119,20 @@ namespace SocialMedia.Api.Controllers
         }
 
         /// <summary>
+        /// Permite dar follow a un usuario por su Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> AddFollower(int id)
+        {
+            var user = await _userService.GetUser(id);
+            var result = await _userService.NewFollower(user);
+            var response = new ApiResponse<bool>(result);
+            return Ok(response);
+        }
+
+        /// <summary>
         /// Permite eliminar un Usuario por su Id
         /// </summary>
         /// <param name="id"></param>

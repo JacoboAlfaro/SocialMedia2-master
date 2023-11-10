@@ -130,6 +130,22 @@ namespace SocialMedia.Core.Services
             return true;
         }
 
+        public async Task<bool> NewCommentLike(Comment comment)
+        {
+            var existingComment = await _unitOfWork.CommentRepository.GetById(comment.Id);
+
+            if (existingComment == null)
+            {
+                throw new BusinessExceptions("Post doesn't exist to update");
+            }
+
+            existingComment.Likes = comment.Likes + 1;
+
+            _unitOfWork.CommentRepository.Update(existingComment);
+            await _unitOfWork.SaveChangesAsync();
+            return true;
+        }
+
         public async Task<bool> DeleteComment(int id)
         {
             Comment comment = await _unitOfWork.CommentRepository.GetById(id);

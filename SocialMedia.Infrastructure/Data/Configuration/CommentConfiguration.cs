@@ -24,6 +24,9 @@ namespace SocialMedia.Infrastructure.Data.Configuration
             builder.Property(e => e.IsActive)
                 .HasColumnName("Activo");
 
+            builder.Property(e => e.Likes)
+                .HasColumnName("Likes");
+
             builder.Property(e => e.Description)
                 .IsRequired()
                 .HasColumnName("Descripcion")

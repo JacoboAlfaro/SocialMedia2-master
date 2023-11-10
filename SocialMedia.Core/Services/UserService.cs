@@ -120,6 +120,22 @@ namespace SocialMedia.Core.Services
             return true;
         }
 
+        public async Task<bool> NewFollower(User user)
+        {
+            var existingUser = await _unitOfWork.UserRepository.GetById(user.Id);
+
+            if (existingUser == null)
+            {
+                throw new BusinessExceptions("Post doesn't exist to update");
+            }
+
+            existingUser.Followers = user.Followers + 1;
+
+            _unitOfWork.UserRepository.Update(existingUser);
+            await _unitOfWork.SaveChangesAsync();
+            return true;
+        }
+
         public async Task<bool> DeleteUser(int id)
         {
             var user = await _unitOfWork.UserRepository.GetById(id);

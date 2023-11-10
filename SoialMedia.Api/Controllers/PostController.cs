@@ -124,6 +124,21 @@ namespace SocialMedia.Api.Controllers
         }
 
         /// <summary>
+        /// Permite dar like al post seleccionado
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="postDto"></param>
+        /// <returns></returns>
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> AddLike(int id)
+        {
+            var post = await _postService.GetPost(id);
+            var result = await _postService.NewLike(post);
+            var response = new ApiResponse<bool>(result);
+            return Ok(response);
+        }
+
+        /// <summary>
         /// Permite eliminar un Post por su Id
         /// </summary>
         /// <param name="id"></param>

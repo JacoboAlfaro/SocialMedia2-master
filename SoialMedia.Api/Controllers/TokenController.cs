@@ -41,7 +41,9 @@ namespace SocialMedia.Api.Controllers
             if (validation.Item1)
             {
                 var token = GenerateToken(validation.Item2);
-                return Ok(new { token });
+                var UsuarioLogado = validation.Item2;
+                var response = new { token, UsuarioLogado };
+                return Ok(response);
             }
             return NotFound();
         }
