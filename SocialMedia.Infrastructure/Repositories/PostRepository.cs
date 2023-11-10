@@ -25,7 +25,8 @@ namespace SocialMedia.Infrastructure.Repositories
                 UserId = p.UserId,
                 Date = p.Date,
                 Description = p.Description,
-                Image = p.Image
+                Image = p.Image,
+                Likes = p.Likes
             }).ToListAsync();
         }
         public async Task<Post> GetSummaryPostByPostId(int id)
@@ -36,7 +37,8 @@ namespace SocialMedia.Infrastructure.Repositories
                 UserId = p.UserId,
                 Date = p.Date,
                 Description = p.Description,
-                Image = p.Image
+                Image = p.Image,
+                Likes = p.Likes
             }).FirstOrDefaultAsync();
         }
     }

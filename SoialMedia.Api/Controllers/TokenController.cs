@@ -65,7 +65,6 @@ namespace SocialMedia.Api.Controllers
             {
                 new Claim("UserName", security.UserName),
                 new Claim("User", security.UserLogin),
-                new Claim("UserId", security.UserId.ToString()),
                 new Claim("Role", security.Role.ToString()),
             };
 
@@ -76,7 +75,7 @@ namespace SocialMedia.Api.Controllers
                 _configuration["Authentication:Audience"],
                 claims,
                 DateTime.Now,
-                DateTime.UtcNow.AddMinutes(120)
+                DateTime.UtcNow.AddHours(12)
             );
 
             //Token

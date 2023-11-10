@@ -22,7 +22,8 @@ namespace SocialMedia.Infrastructure.Repositories
                 Email = u.Email,
                 DateOfBirth = u.DateOfBirth,
                 Telephone = u.Telephone,
-                IsActive = u.IsActive
+                IsActive = u.IsActive,
+                Followers = u.Followers
             }).SingleOrDefaultAsync();
         }
 
