@@ -15,17 +15,22 @@ namespace SocialMedia.Infrastructure.Filters
             if(context.Exception.GetType() == typeof(BusinessExceptions))
             {
                 var exception = (BusinessExceptions)context.Exception;
-                var validation = new
-                {
-                    Status = 400,
-                    Tittle = "Bad request texto",
-                    Detail = exception.Message
-                };
+                //var validation = new
+                //{
+                //    Status = 400,
+                //    Tittle = "Bad request texto",
+                //    Detail = exception.Message
+                //};
                 var json = new
                 {
-                    response = "Fallido",
-                    errors = new { validation }
-                };
+                    respuestaExitosa = false,
+                    errors = new
+                    {
+                        Status = 400,
+                        Tittle = "Bad request",
+                        Detail = exception.Message
+                    }
+            };
                 context.Result = new BadRequestObjectResult(json);
                 context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 context.ExceptionHandled = true;

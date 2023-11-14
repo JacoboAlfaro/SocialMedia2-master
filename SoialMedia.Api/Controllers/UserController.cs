@@ -55,8 +55,8 @@ namespace SocialMedia.Api.Controllers
                 TotalPages = users.TotalPages,
                 HasNextPage = users.HasNextPage,
                 HasPreviousPage = users.HasPreviousPage,
-                NextPageUrl = _uriService.GetUserPaginationUri(filters, Url.RouteUrl(nameof(GetUsers)),users.CurrentPage + 1).ToString(),
-                PreviousPageUrl = _uriService.GetUserPaginationUri(filters, Url.RouteUrl(nameof(GetUsers)), users.CurrentPage - 1).ToString()
+                NextPageUrl = users.HasNextPage ? (_uriService.GetUserPaginationUri(filters, Url.RouteUrl(nameof(GetUsers)), users.CurrentPage + 1).ToString()) : null,
+                PreviousPageUrl = users.HasPreviousPage ? (_uriService.GetUserPaginationUri(filters, Url.RouteUrl(nameof(GetUsers)), users.CurrentPage - 1).ToString()) : null
 
             };
             var response = new ApiResponse<IEnumerable<UserDto>>(usersDtos)

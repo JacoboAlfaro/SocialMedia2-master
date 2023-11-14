@@ -27,7 +27,7 @@ namespace SocialMedia.Core.Services
             
             if (user == null)
             {
-                throw new BusinessExceptions("User doesn't exist");
+                throw new BusinessExceptions("Usuario no encontrado");
             }
 
             var posts = await _unitOfWork.PostRepository.GetSummaryPostsByUserId(id);
@@ -77,37 +77,37 @@ namespace SocialMedia.Core.Services
             return pagedUser;
         }
 
-        public async Task InsertUser(User user)
-        {
-            user.IsActive = true;
-            if ((DateTime.Now - user.DateOfBirth).TotalDays <= 0)
-            {
-                throw new BusinessExceptions("The date of birth can not pass the actual date");
-            } else if((DateTime.Now - user.DateOfBirth).TotalDays < 6571)
-            {
-                throw new BusinessExceptions("You need to have at least 18 years to create a user");
-            }
+        //public async Task InsertUser(User user)
+        //{
+        //    user.IsActive = true;
+        //    if ((DateTime.Now - user.DateOfBirth).TotalDays <= 0)
+        //    {
+        //        throw new BusinessExceptions("The date of birth can not pass the actual date");
+        //    } else if((DateTime.Now - user.DateOfBirth).TotalDays < 6571)
+        //    {
+        //        throw new BusinessExceptions("You need to have at least 18 years to create a user");
+        //    }
 
-            if (!user.Email.EndsWith("@gmail.com"))
-            {
-                throw new BusinessExceptions("Email must end with @gmail.com");
-            }
+        //    if (!user.Email.EndsWith("@gmail.com"))
+        //    {
+        //        throw new BusinessExceptions("Email must end with @gmail.com");
+        //    }
 
-            if (user.Telephone.Length != 10)
-            {
-                throw new BusinessExceptions("Number must have exactly 10 numbers");
-            }
+        //    if (user.Telephone.Length != 10)
+        //    {
+        //        throw new BusinessExceptions("Number must have exactly 10 numbers");
+        //    }
             
-            await _unitOfWork.UserRepository.Add(user);
-            await _unitOfWork.SaveChangesAsync();
-        }
+        //    await _unitOfWork.UserRepository.Add(user);
+        //    await _unitOfWork.SaveChangesAsync();
+        //}
 
         public async Task<bool> UpdateUser(User user)
         {
             var existingUser = await _unitOfWork.UserRepository.GetById(user.Id);
             if (existingUser == null)
             {
-                throw new BusinessExceptions("User doesn't exist to update");
+                throw new BusinessExceptions("El Usuario que desea modificar no existe");
             }
             existingUser.FirstName = user.FirstName;
             existingUser.LastName = user.LastName;
@@ -126,7 +126,7 @@ namespace SocialMedia.Core.Services
 
             if (existingUser == null)
             {
-                throw new BusinessExceptions("Post doesn't exist to update");
+                throw new BusinessExceptions("No es posible seguir a este usuario");
             }
 
             existingUser.Followers = user.Followers + 1;
@@ -142,7 +142,7 @@ namespace SocialMedia.Core.Services
 
             if (user == null)
             {
-                throw new BusinessExceptions("User doesn't exist to delete");
+                throw new BusinessExceptions("El Usuario que desea eliminar no existe");
             }
             await _unitOfWork.UserRepository.Delete(id);
             await _unitOfWork.SaveChangesAsync();
