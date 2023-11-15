@@ -57,8 +57,8 @@ namespace SocialMedia.Api.Controllers
                 TotalPages = comments.TotalPages,
                 HasNextPage = comments.HasNextPage,
                 HasPreviousPage = comments.HasPreviousPage,
-                NextPageUrl = _uriService.GetCommentPaginationUri(filters, Url.RouteUrl(nameof(GetCommentsAsync)), comments.CurrentPage + 1).ToString(),
-                PreviousPageUrl = _uriService.GetCommentPaginationUri(filters, Url.RouteUrl(nameof(GetCommentsAsync)), comments.CurrentPage - 1).ToString()
+                NextPageUrl = comments.HasNextPage ? (_uriService.GetCommentPaginationUri(filters, Url.RouteUrl(nameof(GetCommentsAsync)), comments.CurrentPage + 1).ToString()): null,
+                PreviousPageUrl = comments.HasPreviousPage ? (_uriService.GetCommentPaginationUri(filters, Url.RouteUrl(nameof(GetCommentsAsync)), comments.CurrentPage - 1).ToString()): null
 
             };
             var response = new ApiResponse<IEnumerable<CommentDto>>(commentsDtos)

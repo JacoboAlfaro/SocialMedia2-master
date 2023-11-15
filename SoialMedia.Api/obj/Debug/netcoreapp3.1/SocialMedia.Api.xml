@@ -6,23 +6,153 @@
     <members>
         <member name="M:SocialMedia.Api.Controllers.CommentController.GetCommentsAsync(SocialMedia.Core.QueryFilters.CommentQueryFilter)">
             <summary>
-            Retrieve all comments
+            Permite obtener todos los Comentarios
             </summary>
             <param name="filters">Filters to apply</param>
+            <returns></returns>
+        </member>
+        <member name="M:SocialMedia.Api.Controllers.CommentController.GetComment(System.Int32)">
+            <summary>
+            Permite obtener un Comentario por su Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SocialMedia.Api.Controllers.CommentController.PostComment(SocialMedia.Core.DTOs.CommentDto)">
+            <summary>
+            Permite crear un Comentario 
+            </summary>
+            <param name="commentDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SocialMedia.Api.Controllers.CommentController.Put(System.Int32,SocialMedia.Core.DTOs.CommentDto)">
+            <summary>
+            Permite actualizar un Comentario por su Id
+            </summary>
+            <param name="id"></param>
+            <param name="commentDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SocialMedia.Api.Controllers.CommentController.AddLike(System.Int32)">
+            <summary>
+            Permite agregarle un like al comentario seleccionado
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SocialMedia.Api.Controllers.CommentController.Delete(System.Int32)">
+            <summary>
+            Permite eliminar un Comentario por su Id
+            </summary>
+            <param name="id"></param>
             <returns></returns>
         </member>
         <member name="M:SocialMedia.Api.Controllers.PostController.GetPosts(SocialMedia.Core.QueryFilters.PostQueryFilter)">
             <summary>
-            Retrieve all posts
+            Permite obtener todos los Posts
             </summary>
             <param name="filters">Filters to apply</param>
             <returns></returns>
         </member>
-        <member name="M:SocialMedia.Api.Controllers.UserController.GetUsers(SocialMedia.Core.QueryFilters.UserQueryFilter)">
+        <member name="M:SocialMedia.Api.Controllers.PostController.GetPost(System.Int32)">
             <summary>
-            Retrieve all posts
+            Permite obtener un Post por su Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SocialMedia.Api.Controllers.PostController.Post(SocialMedia.Core.DTOs.PostDto)">
+            <summary>
+            Permite crear un Post
+            </summary>
+            <param name="postDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SocialMedia.Api.Controllers.PostController.Put(System.Int32,SocialMedia.Core.DTOs.PostDto)">
+            <summary>
+            Permite actualizar un Post por su Id
+            </summary>
+            <param name="id"></param>
+            <param name="postDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SocialMedia.Api.Controllers.PostController.AddLike(System.Int32)">
+            <summary>
+            Permite dar like al post seleccionado
+            </summary>
+            <param name="id"></param>
+            <param name="postDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SocialMedia.Api.Controllers.PostController.Delete(System.Int32)">
+            <summary>
+            Permite eliminar un Post por su Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SocialMedia.Api.Controllers.SecurityController.GetLogins(SocialMedia.Core.QueryFilters.SecurityQueryFilter)">
+            <summary>
+            Permite obtener todos los Logins
             </summary>
             <param name="filters">Filters to apply</param>
+            <returns></returns>
+        </member>
+        <member name="M:SocialMedia.Api.Controllers.SecurityController.Post(SocialMedia.Core.DTOs.SecurityDto)">
+            <summary>
+            Permite crear un Login
+            </summary>
+            <param name="securityDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SocialMedia.Api.Controllers.SecurityController.getLoginById(System.Int32)">
+            <summary>
+            Permite obtener un Login por su Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SocialMedia.Api.Controllers.TokenController.Authentication(SocialMedia.Core.Entities.UserLogin)">
+            <summary>
+            Permite generar el token de acceso
+            </summary>
+            <param name="login"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SocialMedia.Api.Controllers.UserController.GetUsers(SocialMedia.Core.QueryFilters.UserQueryFilter)">
+            <summary>
+            Permite obtener todos los Usuarios
+            </summary>
+            <param name="filters">Filters to apply</param>
+            <returns></returns>
+        </member>
+        <member name="M:SocialMedia.Api.Controllers.UserController.GetUser(System.Int32)">
+            <summary>
+            Permite obtener un Usuario por su Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SocialMedia.Api.Controllers.UserController.Put(System.Int32,SocialMedia.Core.DTOs.UserDto)">
+            <summary>
+            Permite actualizar un Usuario por su Id
+            </summary>
+            <param name="id"></param>
+            <param name="userDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SocialMedia.Api.Controllers.UserController.AddFollower(System.Int32)">
+            <summary>
+            Permite dar follow a un usuario por su Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SocialMedia.Api.Controllers.UserController.Delete(System.Int32)">
+            <summary>
+            Permite eliminar un Usuario por su Id
+            </summary>
+            <param name="id"></param>
             <returns></returns>
         </member>
     </members>

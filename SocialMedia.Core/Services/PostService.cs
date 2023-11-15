@@ -31,7 +31,7 @@ namespace SocialMedia.Core.Services
 
             if (post == null)
             {
-                throw new BusinessExceptions("Post doesn't exist");
+                throw new BusinessExceptions("Post no encontrado o no existe");
             }
 
             post.User = await _unitOfWork.UserRepository.GetSummaryUserByUserId(post.UserId);
@@ -77,7 +77,7 @@ namespace SocialMedia.Core.Services
             var user = await _unitOfWork.UserRepository.GetById(post.UserId);
             if (user == null)
             {
-                throw new BusinessExceptions("User doesn't exist");
+                throw new BusinessExceptions("No es posible publicar Post, usuario no existe");
             }
             //if(post.Date == null)
             //{
@@ -91,14 +91,14 @@ namespace SocialMedia.Core.Services
                 var lastPost = userPost.OrderByDescending(x=> x.Date).FirstOrDefault();
                 if ((DateTime.Now - lastPost.Date).TotalDays < 7)
                 {
-                    throw new BusinessExceptions("You are no able to publish the post");
+                    throw new BusinessExceptions("No tiene permitido publicar un post, no puede publicar más de 10 posts en un semana");
                 }
 
             }
 
             if (post.Description.ToLower().Contains("sexo"))
             {
-                throw new BusinessExceptions("Content not allowed");
+                throw new BusinessExceptions("Contenido no permitido o inadecuado");
             }
             await _unitOfWork.PostRepository.Add(post);
             await _unitOfWork.SaveChangesAsync();
@@ -110,7 +110,7 @@ namespace SocialMedia.Core.Services
 
             if (existingPost == null)
             {
-                throw new BusinessExceptions("Post doesn't exist to update");
+                throw new BusinessExceptions("El Post que desea actualizar no existe");
             }
 
             existingPost.Image = post.Image;
@@ -127,7 +127,7 @@ namespace SocialMedia.Core.Services
 
             if (existingPost == null)
             {
-                throw new BusinessExceptions("Post doesn't exist to update");
+                throw new BusinessExceptions("No es posible dar like a este post");
             }
 
             existingPost.Likes = post.Likes + 1;
@@ -143,7 +143,7 @@ namespace SocialMedia.Core.Services
 
             if (post == null)
             {
-                throw new BusinessExceptions("Post doesn't exist to delete");
+                throw new BusinessExceptions("El Post que desea eliminar no existe");
             }
             await _unitOfWork.PostRepository.Delete(id);
             await _unitOfWork.SaveChangesAsync();

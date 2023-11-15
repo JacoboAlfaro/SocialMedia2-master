@@ -31,7 +31,7 @@ namespace SocialMedia.Core.Services
             //Valida si el login existe
             if (login == null)
             {
-                throw new BusinessExceptions("Login doesn't exist");
+                throw new BusinessExceptions("Login no encontrado");
             }
 
             //Agrega la informacion del usuario obteniendola por el id del usuario
@@ -89,21 +89,21 @@ namespace SocialMedia.Core.Services
             security.User.IsActive = true;
             if ((DateTime.Now - security.User.DateOfBirth).TotalDays <= 0)
             {
-                throw new BusinessExceptions("The date of birth can not pass the actual date");
+                throw new BusinessExceptions("La fecha de nacimiento no puede ser superior a la fecha actual");
             }
             else if ((DateTime.Now - security.User.DateOfBirth).TotalDays < 6571)
             {
-                throw new BusinessExceptions("You need to have at least 18 years to create a user");
+                throw new BusinessExceptions("Debe tener al menos 18 años para poder crear un usuario");
             }
 
             if (!security.User.Email.EndsWith("@gmail.com"))
             {
-                throw new BusinessExceptions("Email must end with @gmail.com");
+                throw new BusinessExceptions("Email debe terminar con @gmail.com");
             }
 
             if (security.User.Telephone.Length != 10)
             {
-                throw new BusinessExceptions("Number must have exactly 10 numbers");
+                throw new BusinessExceptions("El número debe ser de 10 digitos");
             }
             await _unitOfWork.SecurityRepository.Add(security);
             await _unitOfWork.SaveChangesAsync();

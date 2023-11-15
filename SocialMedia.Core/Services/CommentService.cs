@@ -31,7 +31,7 @@ namespace SocialMedia.Core.Services
 
             if (comment == null)
             {
-                throw new BusinessExceptions("Comment doesn't exist");
+                throw new BusinessExceptions("Commentario no encontrado");
             }
 
             comment.User = await _unitOfWork.UserRepository.GetSummaryUserByUserId(comment.UserId);
@@ -87,27 +87,27 @@ namespace SocialMedia.Core.Services
 
             if (user == null)
             {
-                throw new BusinessExceptions("User doesn't exist");
+                throw new BusinessExceptions("Usuario no encontrado");
             }
             if (post == null )
             {
-                throw new BusinessExceptions("Post doesn't exist");
+                throw new BusinessExceptions("Post no encontrado");
             }
             if (comment.Description.ToLower().Contains("sexo"))
             {
-                throw new BusinessExceptions("Content not allowed");
+                throw new BusinessExceptions("Contenido no permitido o inadecuado");
             }
             if (comment.PostId == 0)
             {
-                throw new BusinessExceptions("Post must exist");
+                throw new BusinessExceptions("Post debe existir para realizar un comentario");
             }
             if (comment.UserId == 0)
             {
-                throw new BusinessExceptions("User id ca not be 0");
+                throw new BusinessExceptions("Usuario necesario para realizar un comentario");
             }
             if ((DateTime.Now - comment.Date).TotalDays <= 0)
             {
-                throw new BusinessExceptions("The date can not pass the actual date");
+                throw new BusinessExceptions("La fecha no puede ser mayor a la actual");
             }
 
             await _unitOfWork.CommentRepository.Add(comment);
@@ -120,7 +120,7 @@ namespace SocialMedia.Core.Services
             var existingComment = await _unitOfWork.CommentRepository.GetById(comment.Id);
             if(existingComment == null)
             {
-                throw new BusinessExceptions("Comment doesnt exist to update");
+                throw new BusinessExceptions("El Comentario que desea actualizar no existe");
             }
             existingComment.Description = comment.Description;
             existingComment.IsActive = comment.IsActive;
@@ -136,7 +136,7 @@ namespace SocialMedia.Core.Services
 
             if (existingComment == null)
             {
-                throw new BusinessExceptions("Post doesn't exist to update");
+                throw new BusinessExceptions("No es posible dar like a este comentario");
             }
 
             existingComment.Likes = comment.Likes + 1;
@@ -152,7 +152,7 @@ namespace SocialMedia.Core.Services
 
             if (comment == null)
             {
-                throw new BusinessExceptions("Comment doesn't exist to delete");
+                throw new BusinessExceptions("El comentario que desea eliminar no existe");
             }
             await _unitOfWork.CommentRepository.Delete(id);
             await _unitOfWork.SaveChangesAsync();
