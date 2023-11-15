@@ -120,7 +120,7 @@ namespace SocialMedia.Core.Services
             return true;
         }
 
-        public async Task<bool> NewFollower(User user)
+        public async Task<int> NewFollower(User user)
         {
             var existingUser = await _unitOfWork.UserRepository.GetById(user.Id);
 
@@ -133,7 +133,7 @@ namespace SocialMedia.Core.Services
 
             _unitOfWork.UserRepository.Update(existingUser);
             await _unitOfWork.SaveChangesAsync();
-            return true;
+            return existingUser.Followers;
         }
 
         public async Task<bool> DeleteUser(int id)

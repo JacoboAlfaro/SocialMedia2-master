@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using SocialMedia.Api.Responses;
+using SocialMedia.Core.CustomEntities;
 using SocialMedia.Core.Entities;
+using SocialMedia.Core.Exceptions;
 using SocialMedia.Core.Interfaces;
 using SocialMedia.Infrastructure.Interfaces;
 using System;
@@ -41,11 +44,12 @@ namespace SocialMedia.Api.Controllers
             if (validation.Item1)
             {
                 var token = GenerateToken(validation.Item2);
-                var UsuarioLogado = validation.Item2;
-                var response = new { token, UsuarioLogado };
+                var usuarioLogado = validation.Item2;
+                var response = new TokenResponse(token, usuarioLogado);
                 return Ok(response);
             }
-            return NotFound();
+            throw new NotFoundExceptions("Login no encontrado");
+
         }
         private async Task<(bool, Security)> IsValidUser(UserLogin login)
         {

@@ -11,7 +11,7 @@ namespace SocialMedia.Core.Services
         Task<User> GetUser(int id);
         //Task InsertUser(User user);
         Task<bool> UpdateUser(User user);
-        Task<bool> NewFollower(User user);
+        Task<int> NewFollower(User user);
         Task<bool> DeleteUser(int id);
     }
 }

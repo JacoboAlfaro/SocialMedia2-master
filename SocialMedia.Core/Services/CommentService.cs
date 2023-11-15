@@ -130,7 +130,7 @@ namespace SocialMedia.Core.Services
             return true;
         }
 
-        public async Task<bool> NewCommentLike(Comment comment)
+        public async Task<int> NewCommentLike(Comment comment)
         {
             var existingComment = await _unitOfWork.CommentRepository.GetById(comment.Id);
 
@@ -143,7 +143,7 @@ namespace SocialMedia.Core.Services
 
             _unitOfWork.CommentRepository.Update(existingComment);
             await _unitOfWork.SaveChangesAsync();
-            return true;
+            return existingComment.Likes;
         }
 
         public async Task<bool> DeleteComment(int id)

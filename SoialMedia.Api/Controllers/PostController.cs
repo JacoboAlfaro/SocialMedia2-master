@@ -130,7 +130,7 @@ namespace SocialMedia.Api.Controllers
         {
             var post = await _postService.GetPost(id);
             var result = await _postService.NewLike(post);
-            var response = new ApiResponse<bool>(result);
+            var response = new ApiResponse<int>(result);
             return Ok(response);
         }
 

@@ -128,7 +128,7 @@ namespace SocialMedia.Api.Controllers
         {
             var post = await _commentService.GetComment(id);
             var result = await _commentService.NewCommentLike(post);
-            var response = new ApiResponse<bool>(result);
+            var response = new ApiResponse<int>(result);
             return Ok(response);
         }
 

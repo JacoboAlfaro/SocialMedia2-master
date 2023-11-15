@@ -121,7 +121,7 @@ namespace SocialMedia.Core.Services
             return true;
         }
 
-        public async Task<bool> NewLike(Post post)
+        public async Task<int> NewLike(Post post)
         {
             var existingPost = await _unitOfWork.PostRepository.GetById(post.Id);
 
@@ -134,7 +134,7 @@ namespace SocialMedia.Core.Services
 
             _unitOfWork.PostRepository.Update(existingPost);
             await _unitOfWork.SaveChangesAsync();
-            return true;
+            return existingPost.Likes;
         }
 
         public async Task<bool> DeletePost(int id)

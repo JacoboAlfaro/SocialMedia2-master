@@ -12,7 +12,7 @@ namespace SocialMedia.Core.Interfaces
         Task<Post> GetPost(int id);
         Task InsertPost(Post post);
         Task<bool> UpdatePost(Post post);
-        Task<bool> NewLike(Post post);
+        Task<int> NewLike(Post post);
         Task<bool> DeletePost(int id);
     }
 }

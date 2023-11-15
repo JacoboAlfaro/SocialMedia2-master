@@ -88,6 +88,7 @@ namespace SocialMedia.Api.Controllers
         /// </summary>
         /// <param name="userDto"></param>
         /// <returns></returns>
+        
         //[HttpPost]
         //public async Task<IActionResult> Post(UserDto userDto)
         //{
@@ -125,7 +126,7 @@ namespace SocialMedia.Api.Controllers
         {
             var user = await _userService.GetUser(id);
             var result = await _userService.NewFollower(user);
-            var response = new ApiResponse<bool>(result);
+            var response = new ApiResponse<int>(result);
             return Ok(response);
         }
 
