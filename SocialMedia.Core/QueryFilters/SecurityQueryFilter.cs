@@ -1,4 +1,5 @@
 ﻿using SocialMedia.Core.Enumerations;
+using System;
 
 
 namespace SocialMedia.Core.QueryFilters

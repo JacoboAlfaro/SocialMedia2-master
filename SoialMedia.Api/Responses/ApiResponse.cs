@@ -8,7 +8,6 @@ namespace SocialMedia.Api.Responses
         {
             respuestaExitosa = true;
             Data = data;
-            Response = "success";
         }
         public ApiResponse()
         {
