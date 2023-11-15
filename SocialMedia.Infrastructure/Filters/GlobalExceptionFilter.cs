@@ -23,7 +23,7 @@ namespace SocialMedia.Infrastructure.Filters
                 };
                 var json = new
                 {
-                    response = "Fallido",
+                    response = "error",
                     errors = new { validation }
                 };
                 context.Result = new BadRequestObjectResult(json);

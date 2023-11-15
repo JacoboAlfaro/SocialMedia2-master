@@ -63,8 +63,7 @@ namespace SocialMedia.Api.Controllers
             };
             var response = new ApiResponse<IEnumerable<CommentDto>>(commentsDtos)
             {
-                Meta = metadata,
-                Response = "Exitoso"
+                Meta = metadata
         };
 
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
@@ -83,7 +82,6 @@ namespace SocialMedia.Api.Controllers
             var comment = await _commentService.GetComment(id);
             var commentDto = _mapper.Map<CommentDto>(comment);
             var response = new ApiResponse<CommentDto>(commentDto);
-            response.Response = "Exitoso";
             return Ok(response);
         }
 
@@ -101,7 +99,6 @@ namespace SocialMedia.Api.Controllers
 
             commentDto = _mapper.Map<CommentDto>(comment);
             var response = new ApiResponse<CommentDto>(commentDto);
-            response.Response = "Exitoso";
             return Ok(response);
         }
 
@@ -119,7 +116,6 @@ namespace SocialMedia.Api.Controllers
 
             var result = await _commentService.UpdateComment(comment);
             var response = new ApiResponse<bool>(result);
-            response.Response = "Exitoso";
             return Ok(response);
         }
         /// <summary>
@@ -146,7 +142,6 @@ namespace SocialMedia.Api.Controllers
         {
             var result = await _commentService.DeleteComment(id);
             var response = new ApiResponse<bool>(result);
-            response.Response = "Exitoso";
             return Ok(response);
         }
     }

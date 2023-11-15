@@ -7,6 +7,7 @@ namespace SocialMedia.Api.Responses
         public ApiResponse(T data)
         {
             Data = data;
+            Response = "success";
         }
         public string Response { get; set; }
         public T Data { get; set; }

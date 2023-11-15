@@ -64,8 +64,7 @@ namespace SocialMedia.Api.Controllers
             };
             var response = new ApiResponse<IEnumerable<SecurityDto>>(loginsDtos)
             {
-                Meta = metadata,
-                Response = "Exitoso"
+                Meta = metadata
 
         };
 
@@ -89,7 +88,6 @@ namespace SocialMedia.Api.Controllers
 
             securityDto = _mapper.Map<SecurityDto>(security);
             var response = new ApiResponse<SecurityDto>(securityDto);
-            response.Response = "Exitoso";
             return Ok(response);
         }
 
@@ -104,7 +102,6 @@ namespace SocialMedia.Api.Controllers
             var login = await _securityService.GetLogin(id);
             var SecurityDto = _mapper.Map<SecurityDto>(login);
             var response = new ApiResponse<SecurityDto>(SecurityDto);
-            response.Response = "Exitoso";
             return Ok(response);
         }
     }

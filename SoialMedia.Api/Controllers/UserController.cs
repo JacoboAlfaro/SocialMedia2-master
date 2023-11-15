@@ -61,8 +61,7 @@ namespace SocialMedia.Api.Controllers
             };
             var response = new ApiResponse<IEnumerable<UserDto>>(usersDtos)
             {
-                Meta = metadata,
-                Response = "Exitoso"
+                Meta = metadata
             };
 
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
@@ -81,7 +80,6 @@ namespace SocialMedia.Api.Controllers
             var user = await _userService.GetUser(id);
             var userDto = _mapper.Map<UserDto>(user);
             var response = new ApiResponse<UserDto>(userDto);
-            response.Response = "Exitoso";
             return Ok(response);
         }
 
@@ -114,7 +112,6 @@ namespace SocialMedia.Api.Controllers
 
             var result = await _userService.UpdateUser(user);
             var response = new ApiResponse<bool>(result);
-            response.Response = "Exitoso";
             return Ok(response);
         }
 
@@ -142,7 +139,6 @@ namespace SocialMedia.Api.Controllers
         {
             var result = await _userService.DeleteUser(id);
             var response = new ApiResponse<bool>(result);
-            response.Response = "Exitoso";
             return Ok(response);
         }
     }
