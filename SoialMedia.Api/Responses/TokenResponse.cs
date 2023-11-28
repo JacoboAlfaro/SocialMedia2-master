@@ -10,7 +10,7 @@ namespace SocialMedia.Api.Responses
         public TokenResponse(string token, Security usuarioLogado)
         {
             RespuestaExitosa = true;
-            Mensaje = "Token creado correctamente";
+            Mensaje = "Operacion exitosa!";
             Token = token;
             UsuarioLogado = usuarioLogado;
             
