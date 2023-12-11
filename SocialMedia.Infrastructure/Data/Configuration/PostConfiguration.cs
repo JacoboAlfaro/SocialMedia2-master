@@ -18,6 +18,11 @@ namespace SocialMedia.Infrastructure.Data.Configuration
             builder.Property(e => e.UserId)
                 .HasColumnName("IdUsuario");
 
+            builder.Property(e => e.Title)
+                .HasColumnName("Titulo")
+                .IsRequired()
+                .HasMaxLength(200);
+
             builder.Property(e => e.Description)
                 .HasColumnName("Descripcion")
                 .IsRequired()
@@ -32,6 +37,9 @@ namespace SocialMedia.Infrastructure.Data.Configuration
                 .HasColumnName("Imagen")
                 .HasMaxLength(500)
                 .IsUnicode(false);
+
+            builder.Property(e => e.IsEdit)
+                .HasColumnName("Actualizado");
 
             builder.Property(e => e.Likes)
                 .HasColumnName("Likes");

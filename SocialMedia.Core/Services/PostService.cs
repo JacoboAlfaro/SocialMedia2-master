@@ -56,6 +56,10 @@ namespace SocialMedia.Core.Services
             {
                 posts = posts.Where(x => x.Date.ToShortDateString() == filters.Date?.ToShortDateString());
             }
+            if (filters.Title != null)
+            {
+                posts = posts.Where(x => x.Title.ToLower().Contains(filters.Title.ToLower()));
+            }
             if (filters.Description != null)
             {
                 posts = posts.Where(x => x.Description.ToLower().Contains(filters.Description.ToLower()));
@@ -74,10 +78,16 @@ namespace SocialMedia.Core.Services
 
         public async Task InsertPost(Post post)
         {
+            post.IsEdit = false;
             var user = await _unitOfWork.UserRepository.GetById(post.UserId);
             if (user == null)
             {
                 throw new BusinessExceptions("No es posible publicar Post, usuario no existe");
+            }
+
+            if (post.Title == null)
+            {
+                throw new BusinessExceptions("El titulo del post es requerido para ser creado");
             }
             //if(post.Date == null)
             //{
@@ -114,7 +124,10 @@ namespace SocialMedia.Core.Services
             }
 
             existingPost.Image = post.Image;
+            existingPost.Title = post.Title;
             existingPost.Description = post.Description;
+            existingPost.IsEdit = true;
+
 
             _unitOfWork.PostRepository.Update(existingPost);
             await _unitOfWork.SaveChangesAsync();

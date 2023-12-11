@@ -28,6 +28,7 @@ namespace SocialMedia.Infrastructure.Repositories
                 Date = p.Date,
                 Description = p.Description,
                 IsActive = p.IsActive,
+                IsEdit = p.IsEdit,
                 Likes = p.Likes
             }).ToListAsync();
         }

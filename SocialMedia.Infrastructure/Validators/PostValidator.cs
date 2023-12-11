@@ -11,6 +11,14 @@ namespace SocialMedia.Infrastructure.Validators
     {
         public PostValidator()
         {
+            RuleFor(Post => Post.Title)
+                .MaximumLength(200)
+                .WithMessage("La longitud del titulo no debe superar los 200 caracteres");
+
+            RuleFor(Post => Post.Title)
+                .NotNull()
+                .WithMessage("El titulo no puede ser nulo");
+
             RuleFor(Post => Post.Description)
                 .NotNull()
                 .WithMessage("La descripcion no puede ser nulo");

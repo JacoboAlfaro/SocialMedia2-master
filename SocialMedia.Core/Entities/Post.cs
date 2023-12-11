@@ -12,9 +12,12 @@ namespace SocialMedia.Core.Entities
         }
         public int UserId { get; set; }
         public DateTime Date { get; set; }
+        public string Title { get; set; }
         public string Description { get; set; }
         public string Image { get; set; }
-        public int Likes { get; set; } 
+        public bool IsEdit { get; set; }
+        public int Likes { get; set; }
+
 
         public virtual User User { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }

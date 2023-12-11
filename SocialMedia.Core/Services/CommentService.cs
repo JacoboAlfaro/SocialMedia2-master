@@ -81,6 +81,7 @@ namespace SocialMedia.Core.Services
         public async Task InsertComment(Comment comment)
         {
             comment.IsActive = true;
+            comment.IsEdit = false;
 
             var user = await _unitOfWork.UserRepository.GetById(comment.UserId);
             var post = await _unitOfWork.PostRepository.GetById(comment.PostId);
@@ -124,6 +125,7 @@ namespace SocialMedia.Core.Services
             }
             existingComment.Description = comment.Description;
             existingComment.IsActive = comment.IsActive;
+            existingComment.IsEdit = true;
 
             _unitOfWork.CommentRepository.Update(existingComment);
             await _unitOfWork.SaveChangesAsync();

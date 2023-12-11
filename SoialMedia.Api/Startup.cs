@@ -71,14 +71,38 @@ namespace SoialMedia.Api
             {
                 options.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
             });
+
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowLocalhost", builder =>
                 {
-                    builder.WithOrigins("http://localhost:4200")  // Reemplaza con tu origen Angular
-                        .AllowAnyHeader()
-                        .AllowAnyMethod();
+                    builder.WithOrigins("http://localhost:4200")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials();
                 });
+
+                //    services.AddCors(options =>
+                //    {
+                //        options.AddPolicy("AllowLocalhost", builder =>
+                //        {
+                //            builder.WithOrigins("http://localhost:4200")  // Reemplaza con tu origen Angular
+                //                .AllowAnyMethod()
+                //                .AllowAnyHeader()
+                //                .AllowCredentials();
+
+
+                //        });
+
+                //        //services.AddCors(options =>
+                //        //{
+                //        //    options.AddPolicy("CorsPolicy",
+                //        //        builder => builder.AllowAnyOrigin()
+                //        //        .AllowAnyMethod()
+                //        //        .AllowAnyHeader()
+                //        //        .AllowCredentials());
+                //        //});
+                //    });
             });
         }
 
@@ -90,6 +114,8 @@ namespace SoialMedia.Api
                 app.UseDeveloperExceptionPage();
             }
             app.UseCors("AllowLocalhost");
+            //app.UseCors("AllowLocalhost");
+
             app.UseHttpsRedirection();
 
             app.UseSwagger();
@@ -103,8 +129,10 @@ namespace SoialMedia.Api
 
 
             });
-            app.UseRouting();
+            //app.UseCors(options => options.AllowAnyOrigin());
 
+            app.UseHttpsRedirection();
+            app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
 

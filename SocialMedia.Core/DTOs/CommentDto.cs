@@ -13,6 +13,7 @@ namespace SocialMedia.Core.DTOs
         public string Description { get; set; }
         public DateTime? Date { get; set; }
         public bool? IsActive { get; set; }
+        public bool? IsEdit { get; set; }
         public int Likes { get; set; }
 
         public virtual PostDto Post { get; set; }

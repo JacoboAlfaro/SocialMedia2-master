@@ -123,7 +123,6 @@ namespace SocialMedia.Api.Controllers
         /// Permite dar like al post seleccionado
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="postDto"></param>
         /// <returns></returns>
         [HttpPatch("{id}")]
         public async Task<IActionResult> AddLike(int id)

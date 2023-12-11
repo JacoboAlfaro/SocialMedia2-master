@@ -24,8 +24,10 @@ namespace SocialMedia.Infrastructure.Repositories
                 Id = p.Id,
                 UserId = p.UserId,
                 Date = p.Date,
+                Title = p.Title,
                 Description = p.Description,
                 Image = p.Image,
+                IsEdit = p.IsEdit,
                 Likes = p.Likes
             }).ToListAsync();
         }
@@ -36,8 +38,10 @@ namespace SocialMedia.Infrastructure.Repositories
                 Id = p.Id,
                 UserId = p.UserId,
                 Date = p.Date,
+                Title = p.Title,
                 Description = p.Description,
                 Image = p.Image,
+                IsEdit = p.IsEdit,
                 Likes = p.Likes
             }).FirstOrDefaultAsync();
         }

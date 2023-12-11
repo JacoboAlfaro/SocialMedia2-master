@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using SocialMedia.Api.Responses;
@@ -37,6 +38,7 @@ namespace SocialMedia.Api.Controllers
         /// <param name="login"></param>
         /// <returns></returns>
         [HttpPost]
+        //[EnableCors("AllowLocalhost")]
         public  async Task<IActionResult> Authentication(UserLogin login)
         {
             //If it is a valid user
