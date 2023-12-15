@@ -6,6 +6,7 @@ using SocialMedia.Api.Responses;
 using SocialMedia.Core.CustomEntities;
 using SocialMedia.Core.DTOs;
 using SocialMedia.Core.Entities;
+using SocialMedia.Core.Exceptions;
 using SocialMedia.Core.Interfaces;
 using SocialMedia.Core.QueryFilters;
 using SocialMedia.Infrastructure.Interfaces;
@@ -15,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace SocialMedia.Api.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
@@ -93,8 +94,35 @@ namespace SocialMedia.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(PostDto postDto)
         {
-            var post = _mapper.Map<Post>(postDto);
+            //var post = _mapper.Map<Post>(postDto);
 
+            //await _postService.InsertPost(post);
+
+            //postDto = _mapper.Map<PostDto>(post);
+            //var response = new ApiResponse<PostDto>(postDto);
+            //return Ok(response);
+
+            var post = _mapper.Map<Post>(postDto);
+            if (postDto.Image != null)
+            {
+                var imagenMovida = _postService.SaveImage(postDto.Image);
+                if (imagenMovida)
+                {
+                    var imgPrefix = "post_Img_" + postDto.Image.Name;
+                    post.Image = imgPrefix;
+
+
+                    await _postService.InsertPost(post);
+
+                    postDto = _mapper.Map<PostDto>(post);
+                    var responseImg = new ApiResponse<PostDto>(postDto);
+                    return Ok(responseImg);
+                }
+                else
+                {
+                    throw new BusinessExceptions("Nombre de imagen ya existente, seleccione otro nombre o cambie la imagen");
+                }
+            }
             await _postService.InsertPost(post);
 
             postDto = _mapper.Map<PostDto>(post);

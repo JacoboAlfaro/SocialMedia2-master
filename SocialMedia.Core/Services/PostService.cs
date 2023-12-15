@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using SocialMedia.Core.CustomEntities;
+using SocialMedia.Core.DTOs;
 using SocialMedia.Core.Entities;
 using SocialMedia.Core.Exceptions;
 using SocialMedia.Core.Interfaces;
@@ -7,6 +8,7 @@ using SocialMedia.Core.QueryFilters;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,6 +34,11 @@ namespace SocialMedia.Core.Services
             if (post == null)
             {
                 throw new BusinessExceptions("Post no encontrado o no existe");
+            }
+
+            if (post.Image != null)
+            {
+                post.Image = GetImageAsBase64(post.Image);
             }
 
             post.User = await _unitOfWork.UserRepository.GetSummaryUserByUserId(post.UserId);
@@ -72,6 +79,10 @@ namespace SocialMedia.Core.Services
                 post.User = await _unitOfWork.UserRepository.GetSummaryUserByUserId(post.UserId);
                 var comments = await _unitOfWork.CommentRepository.GetCommentsByPostId(post.Id);
                 post.Comments = comments.ToList();
+                if (post.Image != null)
+                {
+                    post.Image = GetImageAsBase64(post.Image.ToString());
+                }
             }
             return pagedPost;
         }
@@ -110,6 +121,7 @@ namespace SocialMedia.Core.Services
             {
                 throw new BusinessExceptions("Contenido no permitido o inadecuado");
             }
+
             await _unitOfWork.PostRepository.Add(post);
             await _unitOfWork.SaveChangesAsync();
         }
@@ -161,6 +173,53 @@ namespace SocialMedia.Core.Services
             await _unitOfWork.PostRepository.Delete(id);
             await _unitOfWork.SaveChangesAsync();
             return true;
+        }
+
+        public bool SaveImage(ImageFIle image)
+        {
+            var srcParts = image.Src.Split(',');
+            var part1_2Base64 = srcParts[0];
+            var a = part1_2Base64.Split('/');
+
+
+            if (srcParts.Length != 2)
+            {
+                throw new BusinessExceptions("Formato base64 no coincide");
+            }
+
+            byte[] imageData = Convert.FromBase64String(srcParts[1]);
+            var postImagePath = Path.Combine("..", "Images", "Posts", "PostImages");
+            var imgPrefix = a[1] +"$post_Img_" + image.Name;
+            if (File.Exists(Path.Combine(postImagePath, imgPrefix)))
+            {
+                return false;
+            }
+
+            File.WriteAllBytes(Path.Combine(postImagePath, imgPrefix), imageData);
+            return true;
+        }
+
+        public string GetImageAsBase64(string imageName)
+        {
+            // Construye la ruta del archivo
+            var imagePath = Path.Combine("..", "Images", "Posts", "PostImages", imageName);
+
+            // Comprueba si el archivo existe
+            if (!File.Exists(imagePath))
+            {
+                throw new BusinessExceptions("Imagen no encontrada" + imageName);
+            }
+
+            // Lee los bytes del archivo
+            byte[] imageData = File.ReadAllBytes(imagePath);
+
+            // Convierte los bytes a base64
+            string imageBase64 = Convert.ToBase64String(imageData);
+
+            var part1Base64 = imageName.Split('$');
+            var part1_2Base64 = part1Base64[0].Split('\\');
+            // Devuelve la base64
+            return $"{part1_2Base64[1]},{imageBase64}";
         }
     }
 }

@@ -8,7 +8,7 @@ namespace SocialMedia.Infrastructure.Mappings
     {
         public AutomapperProfile()
         {
-            CreateMap<Post, PostDto>();
+            CreateMap<Post, PostDto>().ForMember(dest => dest.Image, opt => opt.MapFrom(src => new ImageFIle { Src = src.Image })); ;
             CreateMap<PostDto, Post>();
             CreateMap<User, UserDto>().ReverseMap();
             CreateMap<User, UserSecurityInfoDto>().ReverseMap();

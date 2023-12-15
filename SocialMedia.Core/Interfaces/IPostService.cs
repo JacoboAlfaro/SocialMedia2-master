@@ -1,4 +1,5 @@
 ﻿using SocialMedia.Core.CustomEntities;
+using SocialMedia.Core.DTOs;
 using SocialMedia.Core.Entities;
 using SocialMedia.Core.QueryFilters;
 using System.Collections.Generic;
@@ -14,5 +15,7 @@ namespace SocialMedia.Core.Interfaces
         Task<bool> UpdatePost(Post post);
         Task<int> NewLike(Post post);
         Task<bool> DeletePost(int id);
+        public bool SaveImage(ImageFIle image);
+        public string GetImageAsBase64(string imageName);
     }
 }
