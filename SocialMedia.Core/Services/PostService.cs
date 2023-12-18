@@ -107,9 +107,9 @@ namespace SocialMedia.Core.Services
             //}
 
             var userPost = await _unitOfWork.PostRepository.GetPostsByUser(post.UserId);
-            if (userPost.Count() < 10)
+            if (userPost.Count() < 20 && userPost.Count() > 1)
             {
-                var lastPost = userPost.OrderByDescending(x=> x.Date).FirstOrDefault();
+                var lastPost = userPost.OrderByDescending(x => x.Date).FirstOrDefault();
                 if ((DateTime.Now - lastPost.Date).TotalDays < 7)
                 {
                     throw new BusinessExceptions("No tiene permitido publicar un post, no puede publicar más de 10 posts en un semana");
