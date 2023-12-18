@@ -175,7 +175,7 @@ namespace SocialMedia.Core.Services
             return true;
         }
 
-        public bool SaveImage(ImageFIle image)
+        public (bool,string) SaveImage(ImageFIle image)
         {
             var srcParts = image.Src.Split(',');
             var part1_2Base64 = srcParts[0];
@@ -190,13 +190,15 @@ namespace SocialMedia.Core.Services
             byte[] imageData = Convert.FromBase64String(srcParts[1]);
             var postImagePath = Path.Combine("..", "Images", "Posts", "PostImages");
             var imgPrefix = a[1] +"$post_Img_" + image.Name;
+            //throw new BusinessExceptions(imgPrefix);
+
             if (File.Exists(Path.Combine(postImagePath, imgPrefix)))
             {
-                return false;
+                return (false, null);
             }
 
             File.WriteAllBytes(Path.Combine(postImagePath, imgPrefix), imageData);
-            return true;
+            return (true, imgPrefix);
         }
 
         public string GetImageAsBase64(string imageName)
@@ -207,7 +209,7 @@ namespace SocialMedia.Core.Services
             // Comprueba si el archivo existe
             if (!File.Exists(imagePath))
             {
-                throw new BusinessExceptions("Imagen no encontrada" + imageName);
+                return null;
             }
 
             // Lee los bytes del archivo
@@ -217,9 +219,8 @@ namespace SocialMedia.Core.Services
             string imageBase64 = Convert.ToBase64String(imageData);
 
             var part1Base64 = imageName.Split('$');
-            var part1_2Base64 = part1Base64[0].Split('\\');
             // Devuelve la base64
-            return $"{part1_2Base64[1]},{imageBase64}";
+            return $"{part1Base64[0]},{imageBase64}";
         }
     }
 }

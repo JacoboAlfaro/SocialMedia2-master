@@ -106,9 +106,9 @@ namespace SocialMedia.Api.Controllers
             if (postDto.Image != null)
             {
                 var imagenMovida = _postService.SaveImage(postDto.Image);
-                if (imagenMovida)
+                if (imagenMovida.Item1)
                 {
-                    var imgPrefix = "post_Img_" + postDto.Image.Name;
+                    var imgPrefix = imagenMovida.Item2;
                     post.Image = imgPrefix;
 
 
