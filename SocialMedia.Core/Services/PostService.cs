@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Options;
+﻿using AutoMapper;
+using Microsoft.Extensions.Options;
 using SocialMedia.Core.CustomEntities;
 using SocialMedia.Core.DTOs;
 using SocialMedia.Core.Entities;
@@ -6,11 +7,8 @@ using SocialMedia.Core.Exceptions;
 using SocialMedia.Core.Interfaces;
 using SocialMedia.Core.QueryFilters;
 using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SocialMedia.Core.Services
@@ -18,13 +16,15 @@ namespace SocialMedia.Core.Services
     public class PostService : IPostService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
         private readonly PaginationOptions _paginationOptions;
 
 
-        public PostService(IUnitOfWork unitOfWork, IOptions<PaginationOptions> options)
+        public PostService(IUnitOfWork unitOfWork, IOptions<PaginationOptions> options, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _paginationOptions = options.Value;
+            _mapper = mapper;
         }
 
         public async Task<Post> GetPost(int id)
@@ -107,23 +107,62 @@ namespace SocialMedia.Core.Services
             //}
 
             var userPost = await _unitOfWork.PostRepository.GetPostsByUser(post.UserId);
-            if (userPost.Count() < 20 && userPost.Count() > 1)
+            if (userPost.Count() > 10)
             {
                 var lastPost = userPost.OrderByDescending(x => x.Date).FirstOrDefault();
                 if ((DateTime.Now - lastPost.Date).TotalDays < 7)
                 {
-                    throw new BusinessExceptions("No tiene permitido publicar un post, no puede publicar más de 10 posts en un semana");
+                    throw new BusinessExceptions("No tiene permitido publicar más de un Post por semana si no tiene más de 10 posts creados ("+ userPost.Count() + ")");
                 }
-
             }
 
             if (post.Description.ToLower().Contains("sexo"))
             {
                 throw new BusinessExceptions("Contenido no permitido o inadecuado");
             }
+            //var post = _mapper.Map<Post>(postDto);
+            //if (postDto.Image != null)
+            //{
+            //    var imagenMovida = _postService.SaveImage(postDto.Image);
+            //    if (imagenMovida.Item1)
+            //    {
+            //        var imgPrefix = imagenMovida.Item2;
+            //        post.Image = imgPrefix;
 
-            await _unitOfWork.PostRepository.Add(post);
-            await _unitOfWork.SaveChangesAsync();
+
+            //        await _postService.InsertPost(post);
+
+            //        postDto = _mapper.Map<PostDto>(post);
+            //        var responseImg = new ApiResponse<PostDto>(postDto);
+            //        return Ok(responseImg);
+            //    }
+            //    else
+            //    {
+            //        throw new BusinessExceptions("Nombre de imagen ya existente, seleccione otro nombre o cambie la imagen");
+            //    }
+            //}
+            var postDto = _mapper.Map<PostDto>(post);
+
+            if (postDto.Image.Src != null)
+            {
+                var imagenMovida = SaveImage(postDto.Image);
+                if (imagenMovida.Item1)
+                {
+                    var imgPrefix = imagenMovida.Item2;
+                    post.Image = imgPrefix;
+
+                    await _unitOfWork.PostRepository.Add(post);
+                    await _unitOfWork.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new BusinessExceptions("Imagen ya existe en la BD, cambie el nombre de la imagen o ingrese una nueva");
+                }
+            } else
+            {
+                await _unitOfWork.PostRepository.Add(post);
+                await _unitOfWork.SaveChangesAsync();
+            }
         }
 
         public async Task<bool> UpdatePost(Post post)

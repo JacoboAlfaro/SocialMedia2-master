@@ -103,26 +103,26 @@ namespace SocialMedia.Api.Controllers
             //return Ok(response);
 
             var post = _mapper.Map<Post>(postDto);
-            if (postDto.Image != null)
-            {
-                var imagenMovida = _postService.SaveImage(postDto.Image);
-                if (imagenMovida.Item1)
-                {
-                    var imgPrefix = imagenMovida.Item2;
-                    post.Image = imgPrefix;
+            //if (postdto.image != null)
+            //{
+            //    var imagenmovida = _postservice.saveimage(postdto.image);
+            //    if (imagenmovida.item1)
+            //    {
+            //        var imgprefix = imagenmovida.item2;
+            //        post.image = imgprefix;
 
 
-                    await _postService.InsertPost(post);
+            //        await _postservice.insertpost(post);
 
-                    postDto = _mapper.Map<PostDto>(post);
-                    var responseImg = new ApiResponse<PostDto>(postDto);
-                    return Ok(responseImg);
-                }
-                else
-                {
-                    throw new BusinessExceptions("Nombre de imagen ya existente, seleccione otro nombre o cambie la imagen");
-                }
-            }
+            //        postdto = _mapper.map<postdto>(post);
+            //        var responseimg = new apiresponse<postdto>(postdto);
+            //        return ok(responseimg);
+            //    }
+            //    else
+            //    {
+            //        throw new businessexceptions("nombre de imagen ya existente, seleccione otro nombre o cambie la imagen");
+            //    }
+            //}
             await _postService.InsertPost(post);
 
             postDto = _mapper.Map<PostDto>(post);
