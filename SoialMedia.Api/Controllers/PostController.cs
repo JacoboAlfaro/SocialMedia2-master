@@ -103,6 +103,11 @@ namespace SocialMedia.Api.Controllers
             //return Ok(response);
 
             var post = _mapper.Map<Post>(postDto);
+
+            if(postDto.Image != null)
+            {
+            post.Image = $"{postDto.Image.Name}#{postDto.Image.Src}";
+            }
             //if (postdto.image != null)
             //{
             //    var imagenmovida = _postservice.saveimage(postdto.image);

@@ -141,24 +141,44 @@ namespace SocialMedia.Core.Services
             //        throw new BusinessExceptions("Nombre de imagen ya existente, seleccione otro nombre o cambie la imagen");
             //    }
             //}
-            var postDto = _mapper.Map<PostDto>(post);
-
-            if (postDto.Image.Src != null)
+            //var postDto = _mapper.Map<PostDto>(post);
+            if(post.Image != null)
             {
-                var imagenMovida = SaveImage(postDto.Image);
-                if (imagenMovida.Item1)
+                var image = new ImageFIle();
+                var imageParts = post.Image.Split('#');
+                if (imageParts.Length == 2)
                 {
-                    var imgPrefix = imagenMovida.Item2;
-                    post.Image = imgPrefix;
-
-                    await _unitOfWork.PostRepository.Add(post);
-                    await _unitOfWork.SaveChangesAsync();
+                    image.Name = imageParts[0];
+                    image.Src = imageParts[1];
                 }
                 else
                 {
-                    throw new BusinessExceptions("Imagen ya existe en la BD, cambie el nombre de la imagen o ingrese una nueva");
+                    image = null;
                 }
-            } else
+
+                if (image != null)
+                {
+                    var imagenMovida = SaveImage(image);
+                    if (imagenMovida.Item1)
+                    {
+                        var imgPrefix = imagenMovida.Item2;
+                        post.Image = imgPrefix;
+
+                        await _unitOfWork.PostRepository.Add(post);
+                        await _unitOfWork.SaveChangesAsync();
+                    }
+                    else
+                    {
+                        throw new BusinessExceptions("Imagen ya existe en la BD, cambie el nombre de la imagen o ingrese una nueva");
+                    }
+                }
+                else
+                {
+                    await _unitOfWork.PostRepository.Add(post);
+                    await _unitOfWork.SaveChangesAsync();
+                }
+            }
+            else
             {
                 await _unitOfWork.PostRepository.Add(post);
                 await _unitOfWork.SaveChangesAsync();
