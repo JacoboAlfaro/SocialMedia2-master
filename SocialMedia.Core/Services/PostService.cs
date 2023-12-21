@@ -52,24 +52,25 @@ namespace SocialMedia.Core.Services
             filters.PageNumber = filters.PageNumber == 0 ? _paginationOptions.DefaultPageNumber : filters.PageNumber;
             filters.PageSize = filters.PageSize == 0 ? _paginationOptions.DefaultPageSize : filters.PageSize;
 
-            var posts = _unitOfWork.PostRepository.GetAll();
+            var postOrdered = _unitOfWork.PostRepository.GetAll();
+            var posts = postOrdered.OrderByDescending(x => x.Date);
 
 
             if (filters.UserId != null)
             {
-                posts = posts.Where(x=> x.UserId == filters.UserId);
+                posts = posts.Where(x=> x.UserId == filters.UserId).OrderByDescending(x => x.Date);
             }
             if (filters.Date != null)
             {
-                posts = posts.Where(x => x.Date.ToShortDateString() == filters.Date?.ToShortDateString());
+                posts = posts.Where(x => x.Date.ToShortDateString() == filters.Date?.ToShortDateString()).OrderByDescending(x => x.Date);
             }
             if (filters.Title != null)
             {
-                posts = posts.Where(x => x.Title.ToLower().Contains(filters.Title.ToLower()));
+                posts = posts.Where(x => x.Title.ToLower().Contains(filters.Title.ToLower())).OrderByDescending(x => x.Date);
             }
             if (filters.Description != null)
             {
-                posts = posts.Where(x => x.Description.ToLower().Contains(filters.Description.ToLower()));
+                posts = posts.Where(x => x.Description.ToLower().Contains(filters.Description.ToLower())).OrderByDescending(x => x.Date);
             }
 
             var pagedPost = PagedList<Post>.Create(posts, filters.PageNumber, filters.PageSize);
@@ -100,14 +101,9 @@ namespace SocialMedia.Core.Services
             {
                 throw new BusinessExceptions("El titulo del post es requerido para ser creado");
             }
-            //if(post.Date == null)
-            //{
-            //    string nuevoFormato = post.Date.ToString("yyyy-MM-ddTHH:mm:ss.ff");
-            //    post.Date = DateTime.ParseExact(nuevoFormato, "yyyy-MM-ddTHH:mm:ss.ff", CultureInfo.InvariantCulture);
-            //}
 
             var userPost = await _unitOfWork.PostRepository.GetPostsByUser(post.UserId);
-            if (userPost.Count() > 10)
+            if (userPost.Count() < 10)
             {
                 var lastPost = userPost.OrderByDescending(x => x.Date).FirstOrDefault();
                 if ((DateTime.Now - lastPost.Date).TotalDays < 7)
@@ -120,28 +116,7 @@ namespace SocialMedia.Core.Services
             {
                 throw new BusinessExceptions("Contenido no permitido o inadecuado");
             }
-            //var post = _mapper.Map<Post>(postDto);
-            //if (postDto.Image != null)
-            //{
-            //    var imagenMovida = _postService.SaveImage(postDto.Image);
-            //    if (imagenMovida.Item1)
-            //    {
-            //        var imgPrefix = imagenMovida.Item2;
-            //        post.Image = imgPrefix;
 
-
-            //        await _postService.InsertPost(post);
-
-            //        postDto = _mapper.Map<PostDto>(post);
-            //        var responseImg = new ApiResponse<PostDto>(postDto);
-            //        return Ok(responseImg);
-            //    }
-            //    else
-            //    {
-            //        throw new BusinessExceptions("Nombre de imagen ya existente, seleccione otro nombre o cambie la imagen");
-            //    }
-            //}
-            //var postDto = _mapper.Map<PostDto>(post);
             if(post.Image != null)
             {
                 var image = new ImageFIle();
