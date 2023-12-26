@@ -43,7 +43,7 @@ namespace SocialMedia.Core.Services
 
             post.User = await _unitOfWork.UserRepository.GetSummaryUserByUserId(post.UserId);
             var comments = await _unitOfWork.CommentRepository.GetCommentsByPostId(id);
-            post.Comments = comments.ToList();
+            post.Comments = comments.OrderByDescending(x => x.Date).ToList();
             return post;
         }
 

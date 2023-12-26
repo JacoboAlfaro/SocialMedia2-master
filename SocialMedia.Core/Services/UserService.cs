@@ -31,9 +31,9 @@ namespace SocialMedia.Core.Services
             }
 
             var posts = await _unitOfWork.PostRepository.GetSummaryPostsByUserId(id);
-            user.Posts = posts.ToList();
+            user.Posts = posts.OrderByDescending(x => x.Date).ToList();
             var comments = await _unitOfWork.CommentRepository.GetSummaryCommentsByUserId(id);
-            user.Comments = comments.ToList();
+            user.Comments = comments.OrderByDescending(x => x.Date).ToList();
 
             return user;
 

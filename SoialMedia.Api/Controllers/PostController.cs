@@ -65,7 +65,7 @@ namespace SocialMedia.Api.Controllers
             {
                 Meta = metadata
 
-        };
+            };
 
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
 
