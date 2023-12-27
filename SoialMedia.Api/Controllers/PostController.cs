@@ -161,7 +161,13 @@ namespace SocialMedia.Api.Controllers
         public async Task<IActionResult> AddLike(int id)
         {
             var post = await _postService.GetPost(id);
+            if(post.Image != null)
+            {
+                var imag = post.Image.Split(',');
+                post.Image = imag[0];
+            }
             var result = await _postService.NewLike(post);
+            
             var response = new ApiResponse<int>(result);
             return Ok(response);
         }

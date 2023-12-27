@@ -200,9 +200,16 @@ namespace SocialMedia.Core.Services
         {
             Post post = await _unitOfWork.PostRepository.GetById(id);
 
+            var comments = await _unitOfWork.CommentRepository.GetCommentsByPostId(id);
+            post.Comments = comments.ToList();
+
             if (post == null)
             {
                 throw new BusinessExceptions("El Post que desea eliminar no existe");
+            }
+            if (post.Comments.Count != 0)
+            {
+                throw new BusinessExceptions("El Post no se puede eliminar ya que tiene comentarios asociados a él");
             }
             await _unitOfWork.PostRepository.Delete(id);
             await _unitOfWork.SaveChangesAsync();
