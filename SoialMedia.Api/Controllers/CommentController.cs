@@ -123,7 +123,7 @@ namespace SocialMedia.Api.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpPatch("{id}")]
+        [HttpPut("Like/{id}")]
         public async Task<IActionResult> AddLike(int id)
         {
             var post = await _commentService.GetComment(id);

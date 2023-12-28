@@ -10,7 +10,7 @@ namespace SocialMedia.Core.Interfaces
     public interface IPostService
     {
         Task<PagedList<Post>> GetPosts(PostQueryFilter filters);
-        Task<Post> GetPost(int id);
+        Task<Post> GetPost(int id, bool isImageBase64);
         Task InsertPost(Post post);
         Task<bool> UpdatePost(Post post);
         Task<int> NewLike(Post post);

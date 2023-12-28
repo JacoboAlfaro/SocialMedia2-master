@@ -80,7 +80,7 @@ namespace SocialMedia.Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPost(int id)
         {
-            var post = await _postService.GetPost(id);
+            var post = await _postService.GetPost(id, true);
             var postDto = _mapper.Map<PostDto>(post);
             var response = new ApiResponse<PostDto>(postDto);
             return Ok(response);
@@ -157,15 +157,10 @@ namespace SocialMedia.Api.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpPatch("{id}")]
+        [HttpPut("Like/{id}")]
         public async Task<IActionResult> AddLike(int id)
         {
-            var post = await _postService.GetPost(id);
-            if(post.Image != null)
-            {
-                var imag = post.Image.Split(',');
-                post.Image = imag[0];
-            }
+            var post = await _postService.GetPost(id, false);
             var result = await _postService.NewLike(post);
             
             var response = new ApiResponse<int>(result);

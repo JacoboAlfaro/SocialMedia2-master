@@ -27,7 +27,7 @@ namespace SocialMedia.Core.Services
             _mapper = mapper;
         }
 
-        public async Task<Post> GetPost(int id)
+        public async Task<Post> GetPost(int id, bool isImageBase64)
         {
             Post post = await _unitOfWork.PostRepository.GetById(id);
 
@@ -38,7 +38,10 @@ namespace SocialMedia.Core.Services
 
             if (post.Image != null)
             {
+                if (isImageBase64)
+                {
                 post.Image = GetImageAsBase64(post.Image);
+                }
             }
 
             post.User = await _unitOfWork.UserRepository.GetSummaryUserByUserId(post.UserId);
