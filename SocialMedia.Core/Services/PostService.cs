@@ -3,6 +3,7 @@ using Microsoft.Extensions.Options;
 using SocialMedia.Core.CustomEntities;
 using SocialMedia.Core.DTOs;
 using SocialMedia.Core.Entities;
+using SocialMedia.Core.Enumerations;
 using SocialMedia.Core.Exceptions;
 using SocialMedia.Core.Interfaces;
 using SocialMedia.Core.QueryFilters;
@@ -114,13 +115,17 @@ namespace SocialMedia.Core.Services
                     throw new BusinessExceptions("No tiene permitido publicar más de un Post por semana si no tiene más de 10 posts creados ("+ userPost.Count() + ")");
                 }
             }
-
-            if (post.Description.ToLower().Contains("sexo"))
+            if (typeof(NoValidContentWords).GetEnumNames().Any(word => post.Title.ToLower().Contains(word)))
             {
-                throw new BusinessExceptions("Contenido no permitido o inadecuado");
+                throw new BusinessExceptions($"Contenido no permitido o inadecuado: '{typeof(NoValidContentWords).GetEnumNames().FirstOrDefault(word => post.Description.ToLower().Contains(word))}'");
             }
 
-            if(post.Image != null)
+            if (typeof(NoValidContentWords).GetEnumNames().Any(word => post.Description.ToLower().Contains(word)))
+            {
+                throw new BusinessExceptions($"Contenido no permitido o inadecuado: '{typeof(NoValidContentWords).GetEnumNames().FirstOrDefault(word => post.Description.ToLower().Contains(word))}'" );
+            }
+
+            if (post.Image != null)
             {
                 var image = new ImageFIle();
                 var imageParts = post.Image.Split('#');
@@ -171,7 +176,46 @@ namespace SocialMedia.Core.Services
             {
                 throw new BusinessExceptions("El Post que desea actualizar no existe");
             }
+            if(post.Image != null && existingPost.Image != null)
+            {
+                throw new BusinessExceptions("No puede"+ post.Image + " " + existingPost.Image);
+            }
+            if (post.Image != null)
+            {
+                var image = new ImageFIle();
+                var imageParts = post.Image.Split('#');
+                if (imageParts.Length == 2)
+                {
+                    image.Name = imageParts[0];
+                    image.Src = imageParts[1];
+                }
+                else
+                {
+                    image = null;
+                }
 
+                if (image != null)
+                {
+                    var imagenMovida = SaveImage(image);
+                    if (imagenMovida.Item1)
+                    {
+                        var imgPrefix = imagenMovida.Item2;
+                        post.Image = imgPrefix;
+
+                        _unitOfWork.PostRepository.Update(existingPost);
+                        await _unitOfWork.SaveChangesAsync();
+                    }
+                    else
+                    {
+                        throw new BusinessExceptions("Imagen ya existe en la BD para actualizar, cambie el nombre de la imagen o ingrese una nueva");
+                    }
+                }
+                else
+                {
+                     _unitOfWork.PostRepository.Update(existingPost);
+                    await _unitOfWork.SaveChangesAsync();
+                }
+            }
             existingPost.Image = post.Image;
             existingPost.Title = post.Title;
             existingPost.Description = post.Description;
@@ -236,10 +280,10 @@ namespace SocialMedia.Core.Services
             var imgPrefix = a[1] +"$post_Img_" + image.Name;
             //throw new BusinessExceptions(imgPrefix);
 
-            if (File.Exists(Path.Combine(postImagePath, imgPrefix)))
-            {
-                return (false, null);
-            }
+            //if (File.Exists(Path.Combine(postImagePath, imgPrefix)))
+            //{
+            //    return (false, null);
+            //}
 
             File.WriteAllBytes(Path.Combine(postImagePath, imgPrefix), imageData);
             return (true, imgPrefix);

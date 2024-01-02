@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace SocialMedia.Api.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
@@ -94,40 +94,14 @@ namespace SocialMedia.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(PostDto postDto)
         {
-            //var post = _mapper.Map<Post>(postDto);
-
-            //await _postService.InsertPost(post);
-
-            //postDto = _mapper.Map<PostDto>(post);
-            //var response = new ApiResponse<PostDto>(postDto);
-            //return Ok(response);
 
             var post = _mapper.Map<Post>(postDto);
 
             if(postDto.Image != null)
             {
-            post.Image = $"{postDto.Image.Name}#{postDto.Image.Src}";
+                post.Image = $"{postDto.Image.Name}#{postDto.Image.Src}";
             }
-            //if (postdto.image != null)
-            //{
-            //    var imagenmovida = _postservice.saveimage(postdto.image);
-            //    if (imagenmovida.item1)
-            //    {
-            //        var imgprefix = imagenmovida.item2;
-            //        post.image = imgprefix;
-
-
-            //        await _postservice.insertpost(post);
-
-            //        postdto = _mapper.map<postdto>(post);
-            //        var responseimg = new apiresponse<postdto>(postdto);
-            //        return ok(responseimg);
-            //    }
-            //    else
-            //    {
-            //        throw new businessexceptions("nombre de imagen ya existente, seleccione otro nombre o cambie la imagen");
-            //    }
-            //}
+            
             await _postService.InsertPost(post);
 
             postDto = _mapper.Map<PostDto>(post);
@@ -146,6 +120,11 @@ namespace SocialMedia.Api.Controllers
         {
             var post = _mapper.Map<Post>(postDto);
             post.Id = id;
+
+            if (postDto.Image != null)
+            {
+                post.Image = $"{postDto.Image.Name}#{postDto.Image.Src}";
+            }
 
             var result = await _postService.UpdatePost(post);
             var response = new ApiResponse<bool>(result);
