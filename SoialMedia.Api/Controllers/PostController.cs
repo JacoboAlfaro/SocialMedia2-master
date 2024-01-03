@@ -121,7 +121,7 @@ namespace SocialMedia.Api.Controllers
             var post = _mapper.Map<Post>(postDto);
             post.Id = id;
 
-            if (postDto.Image != null)
+            if (postDto.Image.Name != null)
             {
                 post.Image = $"{postDto.Image.Name}#{postDto.Image.Src}";
             }

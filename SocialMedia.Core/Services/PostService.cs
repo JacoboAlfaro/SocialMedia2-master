@@ -176,9 +176,9 @@ namespace SocialMedia.Core.Services
             {
                 throw new BusinessExceptions("El Post que desea actualizar no existe");
             }
-            if(post.Image != null && existingPost.Image != null)
+            if(post.Image == null && existingPost.Image != null)
             {
-                throw new BusinessExceptions("No puede"+ post.Image + " " + existingPost.Image);
+                throw new BusinessExceptions("Error Gay");
             }
             if (post.Image != null)
             {
