@@ -117,12 +117,12 @@ namespace SocialMedia.Core.Services
             }
             if (typeof(NoValidContentWords).GetEnumNames().Any(word => post.Title.ToLower().Contains(word)))
             {
-                throw new BusinessExceptions($"Contenido no permitido o inadecuado: '{typeof(NoValidContentWords).GetEnumNames().FirstOrDefault(word => post.Description.ToLower().Contains(word))}'");
+                throw new BusinessExceptions($"Contenido no permitido o inadecuado: ' {typeof(NoValidContentWords).GetEnumNames().FirstOrDefault(word => post.Title.ToLower().Contains(word))} '");
             }
 
             if (typeof(NoValidContentWords).GetEnumNames().Any(word => post.Description.ToLower().Contains(word)))
             {
-                throw new BusinessExceptions($"Contenido no permitido o inadecuado: '{typeof(NoValidContentWords).GetEnumNames().FirstOrDefault(word => post.Description.ToLower().Contains(word))}'" );
+                throw new BusinessExceptions($"Contenido no permitido o inadecuado: ' {typeof(NoValidContentWords).GetEnumNames().FirstOrDefault(word => post.Description.ToLower().Contains(word))} '" );
             }
 
             if (post.Image != null)
@@ -176,7 +176,16 @@ namespace SocialMedia.Core.Services
             {
                 throw new BusinessExceptions("El Post que desea actualizar no existe");
             }
-            if(post.Image == null && existingPost.Image != null)
+            if (typeof(NoValidContentWords).GetEnumNames().Any(word => post.Title.ToLower().Contains(word)))
+            {
+                throw new BusinessExceptions($"Contenido no permitido o inadecuado: ' {typeof(NoValidContentWords).GetEnumNames().FirstOrDefault(word => post.Title.ToLower().Contains(word))} '");
+            }
+
+            if (typeof(NoValidContentWords).GetEnumNames().Any(word => post.Description.ToLower().Contains(word)))
+            {
+                throw new BusinessExceptions($"Contenido no permitido o inadecuado: ' {typeof(NoValidContentWords).GetEnumNames().FirstOrDefault(word => post.Description.ToLower().Contains(word))} '");
+            }
+            if (post.Image == null && existingPost.Image != null)
             {
                 throw new BusinessExceptions("Error Gay");
             }

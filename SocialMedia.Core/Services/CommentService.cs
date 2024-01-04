@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using SocialMedia.Core.CustomEntities;
 using SocialMedia.Core.Entities;
+using SocialMedia.Core.Enumerations;
 using SocialMedia.Core.Exceptions;
 using SocialMedia.Core.Interfaces;
 using SocialMedia.Core.QueryFilters;
@@ -94,9 +95,9 @@ namespace SocialMedia.Core.Services
             {
                 throw new BusinessExceptions("Post no encontrado");
             }
-            if (comment.Description.ToLower().Contains("sexo"))
+            if (typeof(NoValidContentWords).GetEnumNames().Any(word => comment.Description.ToLower().Contains(word)))
             {
-                throw new BusinessExceptions("Contenido no permitido o inadecuado");
+                throw new BusinessExceptions($"Contenido no permitido o inadecuado: ' {typeof(NoValidContentWords).GetEnumNames().FirstOrDefault(word => comment.Description.ToLower().Contains(word))} '");
             }
             if (comment.PostId == 0)
             {
@@ -122,6 +123,10 @@ namespace SocialMedia.Core.Services
             if(existingComment == null)
             {
                 throw new BusinessExceptions("El Comentario que desea actualizar no existe");
+            }
+            if (typeof(NoValidContentWords).GetEnumNames().Any(word => comment.Description.ToLower().Contains(word)))
+            {
+                throw new BusinessExceptions($"Contenido no permitido o inadecuado: ' {typeof(NoValidContentWords).GetEnumNames().FirstOrDefault(word => comment.Description.ToLower().Contains(word))} '");
             }
             existingComment.Description = comment.Description;
             existingComment.IsActive = comment.IsActive;
