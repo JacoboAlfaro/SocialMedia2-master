@@ -106,15 +106,15 @@ namespace SocialMedia.Core.Services
                 throw new BusinessExceptions("El titulo del post es requerido para ser creado");
             }
 
-            //var userPost = await _unitOfWork.PostRepository.GetPostsByUser(post.UserId);
-            //if (userPost.Count() < 10)
-            //{
-            //    var lastPost = userPost.OrderByDescending(x => x.Date).FirstOrDefault();
-            //    if ((DateTime.Now - lastPost.Date).TotalDays < 7)
-            //    {
-            //        throw new BusinessExceptions("No tiene permitido publicar más de un Post por semana si no tiene más de 10 posts creados ("+ userPost.Count() + ")");
-            //    }
-            //}
+            var userPost = await _unitOfWork.PostRepository.GetPostsByUser(post.UserId);
+            if (userPost.Count() < 10)
+            {
+                var lastPost = userPost.OrderByDescending(x => x.Date).FirstOrDefault();
+                if ((DateTime.Now - lastPost.Date).TotalDays < 7)
+                {
+                    throw new BusinessExceptions("No tiene permitido publicar más de un Post por semana si no tiene más de 10 posts creados (" + userPost.Count() + ")");
+                }
+            }
             if (typeof(NoValidContentWords).GetEnumNames().Any(word => post.Title.ToLower().Contains(word)))
             {
                 throw new BusinessExceptions($"Contenido no permitido o inadecuado: ' {typeof(NoValidContentWords).GetEnumNames().FirstOrDefault(word => post.Title.ToLower().Contains(word))} '");

@@ -9,6 +9,7 @@ namespace SocialMedia.Core.Interfaces
     {
         Task<PagedList<Security>> GetLogins(SecurityQueryFilter filters);
         Task<Security> GetLogin(int id);
+        Task<Security> GetLoginByUserId(int id);
         Task<Security> GetLoginByCredentials(UserLogin userLogin);
         Task RegisterUser(Security security);
         

@@ -39,6 +39,22 @@ namespace SocialMedia.Core.Services
             return login;
         }
 
+        //Metodo para obtener un login por su userId
+        public async Task<Security> GetLoginByUserId(int userId)
+        {
+            var login = await _unitOfWork.SecurityRepository.GetByUserId(userId);
+
+            //Valida si el login existe
+            if (login == null)
+            {
+                throw new BusinessExceptions("Login no encontrado");
+            }
+
+            //Agrega la informacion del usuario obteniendola por el id del usuario
+            login.User = await _unitOfWork.UserRepository.GetSummaryUserByUserId(login.UserId);
+            return login;
+        }
+
         //Metodo para obtener un login por el userLogin y contrasenia
         public async Task<Security> GetLoginByCredentials(UserLogin userLogin)
         {

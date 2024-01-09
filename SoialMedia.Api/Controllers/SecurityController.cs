@@ -106,5 +106,19 @@ namespace SocialMedia.Api.Controllers
             var response = new ApiResponse<SecurityDto>(SecurityDto);
             return Ok(response);
         }
+
+        /// <summary>
+        /// Permite obtener un Login por su userId
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        [HttpGet("User/{userId}")]
+        public async Task<IActionResult> getLoginByUserId(int userId)
+        {
+            var login = await _securityService.GetLoginByUserId(userId);
+            var SecurityDto = _mapper.Map<SecurityDto>(login);
+            var response = new ApiResponse<SecurityDto>(SecurityDto);
+            return Ok(response);
+        }
     }
 }

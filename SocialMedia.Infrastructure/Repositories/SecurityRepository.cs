@@ -18,5 +18,10 @@ namespace SocialMedia.Infrastructure.Repositories
         {
             return await _entities.FirstOrDefaultAsync(x => x.UserLogin == login.User);
         }
+        public async Task<Security> GetByUserId(int id)
+        {
+            return await _entities.FirstOrDefaultAsync(x => x.UserId == id);
+
+        }
     }
 }
