@@ -121,7 +121,7 @@ namespace SocialMedia.Api.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpPatch("{id}")]
+        [HttpPut("Follow/{id}")]
         public async Task<IActionResult> AddFollower(int id)
         {
             var user = await _userService.GetUser(id);
