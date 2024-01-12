@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using SocialMedia.Core.DTOs;
 using SocialMedia.Core.Entities;
+using System.Linq;
 
 namespace SocialMedia.Infrastructure.Mappings
 {
@@ -15,10 +16,14 @@ namespace SocialMedia.Infrastructure.Mappings
             CreateMap<Post, PostDto>().ForMember(dest => dest.Image, opt => opt.MapFrom(src => new ImageFIle { Src = src.Image })); ;
             CreateMap<PostDto, Post>();
             CreateMap<User, UserDto>().ReverseMap();
-            CreateMap<User, UserSecurityInfoDto>().ReverseMap();
+
+            //CreateMap<User, UserPostCommentsCountDto>()
+            // .ForMember(dest => dest.Posts, opt => opt.MapFrom(src => src.Posts.Select(p => Mapper.Map<PostCommentsCountDto>(p))));
+
+            //CreateMap<User, UserPostCommentsCountDto>()
+            //    .ForMember(dest => dest.CommentsCount, opt => opt.MapFrom(src => src.Posts?.Count() ?? 0));
             CreateMap<Comment, CommentDto>().ReverseMap();
             CreateMap<Security, SecurityDto>().ReverseMap();
-
         }
     }
 }

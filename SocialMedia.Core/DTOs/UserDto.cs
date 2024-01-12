@@ -17,6 +17,5 @@ namespace SocialMedia.Core.DTOs
 
         public virtual ICollection<CommentDto> Comments { get; set; }
         public virtual ICollection<PostDto> Posts { get; set; }
-        //public virtual SecurityDto Security { get; set; }
     }
 }

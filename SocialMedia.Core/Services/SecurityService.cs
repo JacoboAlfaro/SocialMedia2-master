@@ -135,23 +135,60 @@ namespace SocialMedia.Core.Services
             //Filtros para buscar logins
             if (filters.UserLogin != null)
             {
-                logins = logins.Where(x => x.UserLogin.ToLower() == filters.UserLogin.ToLower());
+                logins = logins.Where(x => x.UserLogin.ToLower().Contains(filters.UserLogin.ToLower()));
             }
             if (filters.UserName != null)
             {
-                logins = logins.Where(x => x.UserName.ToLower() == filters.UserName.ToLower());
+                logins = logins.Where(x => x.UserName.ToLower().Contains(filters.UserName.ToLower()));
             }
             if (filters.Role != null)
             {
                 logins = logins.Where(x => x.Role.ToString() == filters.Role.ToString());
             }
+            //if (filters.FirstName != null)
+            //{
+            //    logins = logins.Where(x => x.User.FirstName.ToLower().Contains(filters.FirstName.ToLower()));
+            //}
+            //logins = logins.Where(x => x.User != null && x.User.FirstName.ToLower() == filters.FirstName.ToLower());
+            //if (filters.LastName != null)
+            //{
+            //    logins = logins.Where(x => x.User.LastName.ToLower().Contains(filters.LastName.ToLower()));
+            //}
+            //if (filters.Email != null)
+            //{
+            //    logins = logins.Where(x => x.User.Email.ToLower().Contains(filters.Email.ToLower()));
+            //}
+            //if (filters.Telephone != null)
+            //{
+            //    logins = logins.Where(x => x.User.Telephone.ToLower().Contains(filters.Telephone.ToLower()));
+            //}
+            //if (filters.DateOfBirth != null)
+            //{
+            //    logins = logins.Where(x => x.User?.DateOfBirth.ToShortDateString() == filters.DateOfBirth?.ToShortDateString());
+            //}
+
+
+            //if (filters.IsActive.HasValue)
+            //{
+            //    //throw new BusinessExceptions($"{filters.IsActive.Value} aaa");
+            //    logins = logins.Where(s => s.User.IsActive == filters.IsActive.Value);
+            //    throw new BusinessExceptions($"{logins}");
+            //}
+
+
+            //logins = logins.Where(x => x.User != null && x.User.IsActive == filters.IsActive.Value);
 
             //Recorre el paginado para agregar la informacion del usuario por cada registro 
             var pagedLogins = PagedList<Security>.Create(logins, filters.PageNumber, filters.PageSize);
             foreach(var login in pagedLogins)
             {
                 login.User = await _unitOfWork.UserRepository.GetSummaryUserByUserId(login.UserId);
+                var posts = await _unitOfWork.PostRepository.GetSummaryPostsByUserId(login.User.Id);
+                login.User.Posts = posts.ToList();
+                var comments = await _unitOfWork.CommentRepository.GetSummaryCommentsByUserId(login.User.Id);
+                login.User.Comments = comments.ToList();
             }
+
             return pagedLogins;
         }
     }

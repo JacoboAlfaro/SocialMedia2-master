@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SocialMedia.Core.DTOs
 {
-    public class UserSecurityInfoDto
+    public class UserPostCommentsCountDto
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -13,5 +13,9 @@ namespace SocialMedia.Core.DTOs
         public DateTime? DateOfBirth { get; set; }
         public string Telephone { get; set; }
         public bool? IsActive { get; set; }
+        public int Followers { get; set; }
+
+        public virtual ICollection<CommentDto> Comments { get; set; }
+        public virtual ICollection<PostCommentsCountDto> Posts { get; set; }
     }
 }

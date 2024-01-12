@@ -14,11 +14,13 @@ namespace SocialMedia.Core.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly PaginationOptions _paginationOptions;
+        private readonly IPostService _postService;
 
-        public UserService(IUnitOfWork unitOfWork, IOptions<PaginationOptions> options)
+        public UserService(IUnitOfWork unitOfWork, IOptions<PaginationOptions> options, IPostService postService)
         {
             _unitOfWork = unitOfWork;
             _paginationOptions = options.Value;
+            _postService = postService;
         }
 
         public async Task<User> GetUser(int id)
@@ -32,9 +34,21 @@ namespace SocialMedia.Core.Services
 
             var posts = await _unitOfWork.PostRepository.GetSummaryPostsByUserId(id);
             user.Posts = posts.OrderByDescending(x => x.Date).ToList();
+
+            foreach(var post in user.Posts)
+            {
+                var postComments = await _unitOfWork.CommentRepository.GetCommentsByPostId(post.Id);
+                post.Comments = postComments.ToList();
+                if (post.Image != null)
+                {
+                    post.Image = _postService.GetImageAsBase64(post.Image);
+                }
+            }
+
             var comments = await _unitOfWork.CommentRepository.GetSummaryCommentsByUserId(id);
             user.Comments = comments.OrderByDescending(x => x.Date).ToList();
 
+            
             return user;
 
         }
