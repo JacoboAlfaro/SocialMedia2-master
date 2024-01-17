@@ -27,6 +27,10 @@ namespace SocialMedia.Infrastructure.Validators
                 .Length(10,1000)
                 .WithMessage("La longitud de la descripcion debe estar entre 10 y 1000 caracteres");
 
+            RuleFor(Post => Post.Categories)
+                .MaximumLength(1000)
+                .WithMessage("El post no puede tener mas de 50 categorias");
+
             RuleFor(Post => Post.Date)
                 .NotNull()
                 .LessThan(DateTime.Now);

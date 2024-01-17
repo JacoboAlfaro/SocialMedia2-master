@@ -40,6 +40,11 @@ namespace SocialMedia.Infrastructure.Data.Configuration
                 .HasColumnName("Fecha")
                 .HasColumnType("datetime");
 
+            builder.Property(e => e.Categories)
+                .HasColumnName("Categorias")
+                .HasMaxLength(1000)
+                .IsUnicode(false);
+
             builder.HasOne(d => d.Post)
                 .WithMany(p => p.Comments)
                 .HasForeignKey(d => d.PostId)

@@ -15,6 +15,8 @@ namespace SocialMedia.Core.DTOs
         public bool? IsActive { get; set; }
         public bool? IsEdit { get; set; }
         public int Likes { get; set; }
+        public string? Categories { get; set; }
+
 
         public virtual PostDto Post { get; set; }
         public virtual UserDto User { get; set; }

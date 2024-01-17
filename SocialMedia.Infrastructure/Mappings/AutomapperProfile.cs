@@ -24,6 +24,8 @@ namespace SocialMedia.Infrastructure.Mappings
             //    .ForMember(dest => dest.CommentsCount, opt => opt.MapFrom(src => src.Posts?.Count() ?? 0));
             CreateMap<Comment, CommentDto>().ReverseMap();
             CreateMap<Security, SecurityDto>().ReverseMap();
+            CreateMap<Category, CategoryDto>().ReverseMap();
+
         }
     }
 }

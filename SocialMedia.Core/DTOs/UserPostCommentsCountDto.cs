@@ -16,6 +16,6 @@ namespace SocialMedia.Core.DTOs
         public int Followers { get; set; }
 
         public virtual ICollection<CommentDto> Comments { get; set; }
-        public virtual ICollection<PostCommentsCountDto> Posts { get; set; }
+        public virtual ICollection<PostDto> Posts { get; set; }
     }
 }

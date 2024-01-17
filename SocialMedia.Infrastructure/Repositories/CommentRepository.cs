@@ -2,10 +2,8 @@
 using SocialMedia.Core.Entities;
 using SocialMedia.Core.Interfaces;
 using SocialMedia.Infrastructure.Data;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SocialMedia.Infrastructure.Repositories
@@ -29,7 +27,8 @@ namespace SocialMedia.Infrastructure.Repositories
                 Description = p.Description,
                 IsActive = p.IsActive,
                 IsEdit = p.IsEdit,
-                Likes = p.Likes
+                Likes = p.Likes,
+                Categories = p.Categories
             }).ToListAsync();
         }
     }

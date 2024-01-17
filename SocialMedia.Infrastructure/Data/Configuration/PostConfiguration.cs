@@ -44,6 +44,11 @@ namespace SocialMedia.Infrastructure.Data.Configuration
             builder.Property(e => e.Likes)
                 .HasColumnName("Likes");
 
+            builder.Property(e => e.Categories)
+                .HasColumnName("Categorias")
+                .HasMaxLength(1000)
+                .IsUnicode(false);
+
             builder.HasOne(d => d.User)
                 .WithMany(p => p.Posts)
                 .HasForeignKey(d => d.UserId)

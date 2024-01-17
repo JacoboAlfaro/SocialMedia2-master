@@ -12,6 +12,8 @@ namespace SocialMedia.Core.Entities
         public bool IsActive { get; set; }
         public bool IsEdit { get; set; }
         public int Likes { get; set; }
+        public string Categories { get; set; }
+
 
 
         public virtual Post Post { get; set; }

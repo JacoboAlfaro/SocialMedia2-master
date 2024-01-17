@@ -10,6 +10,7 @@ namespace SocialMedia.Core.Interfaces
         IUserRepository UserRepository { get; }
         ICommentRepository CommentRepository { get; }
         ISecurityRepository SecurityRepository { get; }
+        ICategoryRepository CategoryRepository { get; }
 
         void SaveChanges();
 

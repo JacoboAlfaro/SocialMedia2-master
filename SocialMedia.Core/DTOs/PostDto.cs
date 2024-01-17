@@ -17,6 +17,8 @@ namespace SocialMedia.Core.DTOs
         public ImageFIle? Image { get; set; }
         public bool IsEdit { get; set; }
         public int Likes { get; set; }
+        public string? Categories { get; set; }
+
 
         public virtual UserDto User { get; set; }
         public virtual ICollection<CommentDto> Comments { get; set; }

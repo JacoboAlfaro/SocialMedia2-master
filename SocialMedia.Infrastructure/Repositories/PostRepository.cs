@@ -28,7 +28,8 @@ namespace SocialMedia.Infrastructure.Repositories
                 Description = p.Description,
                 Image = p.Image,
                 IsEdit = p.IsEdit,
-                Likes = p.Likes
+                Likes = p.Likes,
+                Categories = p.Categories
             }).ToListAsync();
         }
         public async Task<Post> GetSummaryPostByPostId(int id)
@@ -42,7 +43,8 @@ namespace SocialMedia.Infrastructure.Repositories
                 Description = p.Description,
                 Image = p.Image,
                 IsEdit = p.IsEdit,
-                Likes = p.Likes
+                Likes = p.Likes,
+                Categories = p.Categories
             }).FirstOrDefaultAsync();
         }
     }

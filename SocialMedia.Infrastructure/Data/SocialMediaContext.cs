@@ -19,6 +19,9 @@ namespace SocialMedia.Infrastructure.Data
         public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Security> Securities { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+
+
 
 
 

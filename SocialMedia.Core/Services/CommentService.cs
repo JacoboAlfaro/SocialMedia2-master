@@ -35,6 +35,18 @@ namespace SocialMedia.Core.Services
                 throw new BusinessExceptions("Commentario no encontrado");
             }
 
+            if (comment.Categories != null)
+            {
+                var parts = comment.Categories.Split(',');
+                var cadena = "";
+                foreach (var part in parts)
+                {
+                    cadena += ($"{await _unitOfWork.CategoryRepository.GetNameById(Convert.ToInt32(part))},");
+                }
+                cadena = cadena.Trim(',');
+                comment.Categories = cadena;
+            }
+
             comment.User = await _unitOfWork.UserRepository.GetSummaryUserByUserId(comment.UserId);
             comment.Post = await _unitOfWork.PostRepository.GetSummaryPostByPostId(comment.PostId);
             return comment;
@@ -72,6 +84,17 @@ namespace SocialMedia.Core.Services
 
             foreach (var comment in pagedComments)
             {
+                if (comment.Categories != null)
+                {
+                    var parts = comment.Categories.Split(',');
+                    var cadena = "";
+                    foreach (var part in parts)
+                    {
+                        cadena += ($"{await _unitOfWork.CategoryRepository.GetNameById(Convert.ToInt32(part))},");
+                    }
+                    cadena = cadena.Trim(',');
+                    comment.Categories = cadena;
+                }
                 comment.User = await _unitOfWork.UserRepository.GetSummaryUserByUserId(comment.UserId);
                 comment.Post = await _unitOfWork.PostRepository.GetSummaryPostByPostId(comment.PostId);
             }

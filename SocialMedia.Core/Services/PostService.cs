@@ -44,6 +44,17 @@ namespace SocialMedia.Core.Services
                 post.Image = GetImageAsBase64(post.Image);
                 }
             }
+            if (post.Categories != null)
+            {
+                var parts = post.Categories.Split(',');
+                var cadena = "";
+                foreach (var part in parts)
+                {
+                    cadena += ($"{await _unitOfWork.CategoryRepository.GetNameById(Convert.ToInt32(part))},");
+                }
+                cadena = cadena.Trim(',');
+                post.Categories = cadena;
+            }
 
             post.User = await _unitOfWork.UserRepository.GetSummaryUserByUserId(post.UserId);
             var comments = await _unitOfWork.CommentRepository.GetCommentsByPostId(id);
@@ -87,6 +98,17 @@ namespace SocialMedia.Core.Services
                 if (post.Image != null)
                 {
                     post.Image = GetImageAsBase64(post.Image.ToString());
+                }
+                if (post.Categories != null)
+                {
+                    var parts = post.Categories.Split(',');
+                    var cadena = "";
+                    foreach (var part in parts)
+                    {
+                        cadena += ($"{await _unitOfWork.CategoryRepository.GetNameById(Convert.ToInt32(part))},");
+                    }
+                    cadena = cadena.Trim(',');
+                    post.Categories = cadena;
                 }
             }
             return pagedPost;

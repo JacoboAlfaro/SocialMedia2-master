@@ -17,6 +17,8 @@ namespace SocialMedia.Core.Entities
         public string Image { get; set; }
         public bool IsEdit { get; set; }
         public int Likes { get; set; }
+        public string Categories { get; set; }
+
 
 
         public virtual User User { get; set; }

@@ -12,6 +12,7 @@ namespace SocialMedia.Infrastructure.Repositories
         private readonly IUserRepository _userRepository;
         private readonly ICommentRepository _commentRepository;
         private readonly ISecurityRepository _securityRepository;
+        private readonly ICategoryRepository _categoryRepository;
 
 
 
@@ -27,6 +28,9 @@ namespace SocialMedia.Infrastructure.Repositories
         public ICommentRepository CommentRepository => _commentRepository ?? new CommentRepository(_context);
 
         public ISecurityRepository SecurityRepository => _securityRepository ?? new SecurityRepository(_context);
+
+        public ICategoryRepository CategoryRepository => _categoryRepository ?? new CategoryRepository(_context);
+
 
 
         public void Dispose()
