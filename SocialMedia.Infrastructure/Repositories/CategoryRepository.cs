@@ -18,6 +18,10 @@ namespace SocialMedia.Infrastructure.Repositories
         public async Task<string> GetNameById(int id)
         {
             var category = await _entities.FirstOrDefaultAsync(x => x.Id == id);
+            if (category == null)
+            {
+                return "Sin cateogoria#FFF0F5";
+            }
             return $"{category.Name}#{category.Color}";
         }
     }
